@@ -16,6 +16,7 @@ public class Role {
     private Integer id;
      
     private String role;
+    
     public Integer getId() {
         return id;
     }
