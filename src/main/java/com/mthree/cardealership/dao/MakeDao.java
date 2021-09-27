@@ -19,5 +19,6 @@ public interface MakeDao {
     String getMakeNameById(int id);
     Make getMakeById(int id);
     void deleteMakeById(int id);
+    Make getMakeByName(String name);
     
 }

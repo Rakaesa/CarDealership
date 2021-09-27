@@ -138,4 +138,20 @@ public class MakeDaoDBTest {
         
     }
     
+    @Test
+    public void testGetMakeByName() {
+        Make make = new Make();
+        make.setMake("Bentley");
+        make.setDateAdded(LocalDate.now());
+        make.setUserID(123);
+        makeDao.addMake(make);
+        
+        Make fromDao = makeDao.getMakeByName(make.getMake());
+        assertEquals(make, fromDao);
+        
+        Make fromDaoNull = makeDao.getMakeByName("noOne");
+        assertNull(fromDaoNull);
+        
+    }
+    
 }

@@ -78,6 +78,21 @@ public class MakeDaoDB implements MakeDao{
         return make.getMake();
     }
     
+    @Override
+    public Make getMakeByName(String name) {
+        
+        try {
+            
+            final String SELECT_MAKE_BY_NAME = "SELECT * FROM make WHERE make = ?";
+            Make make = jdbc.queryForObject(SELECT_MAKE_BY_NAME, new MakeMapper(), name);
+            return make;
+
+        } catch(DataAccessException ex) {
+            return null;
+        }
+        
+    }
+    
     
     public static final class MakeMapper implements RowMapper<Make> {
         
