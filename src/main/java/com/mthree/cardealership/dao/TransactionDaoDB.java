@@ -5,7 +5,6 @@
  */
 package com.mthree.cardealership.dao;
 
-import com.mthree.cardealership.entities.Contact;
 import com.mthree.cardealership.entities.Transaction;
 import com.mthree.cardealership.entities.User;
 import java.sql.ResultSet;
