@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @author ychen
  */
 @Component
-public class Model {
+public class CarModel {
     
     private int id;
     private String model;
@@ -85,7 +85,7 @@ public class Model {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Model other = (Model) obj;
+        final CarModel other = (CarModel) obj;
         if (this.id != other.id) {
             return false;
         }
