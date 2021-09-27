@@ -54,6 +54,16 @@ public class Model {
         this.userID = userID;
     }
 
+    public LocalDate getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(LocalDate dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 3;
