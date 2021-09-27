@@ -1,8 +1,5 @@
-com\mthree\cardealership\entities\User.class
-com\mthree\cardealership\service\DealershipUserDetails.class
-com\mthree\cardealership\service\dummy.class
-com\mthree\cardealership\service\UserDetailsServiceImpl.class
-com\mthree\cardealership\dao\dummy.class
 com\mthree\cardealership\entities\UserRepository.class
-com\mthree\cardealership\controller\dummy.class
+com\mthree\cardealership\entities\User.class
+com\mthree\cardealership\service\UserDetailsServiceImpl.class
 com\mthree\cardealership\entities\Role.class
+com\mthree\cardealership\service\DealershipUserDetails.class
