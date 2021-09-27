@@ -72,6 +72,11 @@
             <version>2.2.0.RELEASE</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version> 5.2.1.Final</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
