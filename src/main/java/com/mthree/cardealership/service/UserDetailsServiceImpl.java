@@ -5,6 +5,7 @@
  */
 package com.mthree.cardealership.service;
 
+import com.mthree.cardealership.entities.User;
 import com.mthree.cardealership.entities.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;

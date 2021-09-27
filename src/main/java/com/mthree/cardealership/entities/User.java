@@ -6,7 +6,6 @@
 package com.mthree.cardealership.entities;
 
 import java.util.*; 
-import javax.management.relation.Role;
 import javax.persistence.*;
 
 @Entity
