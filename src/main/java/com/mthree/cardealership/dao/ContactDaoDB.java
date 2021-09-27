@@ -15,10 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author conno
- */
+
 @Repository
 public class ContactDaoDB implements ContactDao{
     
