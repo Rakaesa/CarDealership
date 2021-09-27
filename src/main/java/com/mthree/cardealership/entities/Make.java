@@ -5,6 +5,7 @@
  */
 package com.mthree.cardealership.entities;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class Make {
     private int id;
     private String make;
     private int userID;
+    private LocalDate dateAdded;
 
     public int getId() {
         return id;

@@ -5,6 +5,7 @@
  */
 package com.mthree.cardealership.entities;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ public class Model {
     private String model;
     private int makeID;
     private int userID;
+    private LocalDate dateAdded;
 
     public int getId() {
         return id;
