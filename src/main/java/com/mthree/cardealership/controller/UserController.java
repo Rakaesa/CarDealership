@@ -23,11 +23,18 @@ public class UserController {
     @Autowired
     UserDao userDao;
     
-    @GetMapping("users")
+    @GetMapping("admin/users")
     public String displayUsers(Model model) {
         List<User> users = userDao.getAllUsers();
         model.addAttribute("users", users);
         return "users";
+    }
+    
+    @GetMapping("admin/editUser")
+    public String editUser(Integer id, Model model) {
+        User user = userDao.getUserById(id);
+        model.addAttribute("user", user);
+        return "edituser";
     }
     
 }

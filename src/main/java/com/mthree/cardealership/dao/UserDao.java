@@ -15,7 +15,7 @@ import java.util.List;
 public interface UserDao {
     
     User getUserEmailById(int id);
-    
+    User getUserById(int id);
     List<User> getAllUsers();
     
 }

@@ -43,6 +43,17 @@ public class UserDaoDB implements UserDao{
         return users;
     }
     
+    @Override
+    public User getUserById(int id) {
+        try {
+            final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
+            User user = jdbc.queryForObject(SELECT_USER_BY_ID, new UserMapper(), id);
+            return user;
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+    
     public static final class UserMapper implements RowMapper<User> {
 
         @Override

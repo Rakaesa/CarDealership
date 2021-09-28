@@ -5,7 +5,7 @@ USE carDealership;
 CREATE TABLE users(
     id INT primary key auto_increment,
     username varchar(50) NOT NULL,
-    password varchar(50) not null,
+    password varchar(255) not null,
     email varchar(50) not null,
     firstname varchar(50),
     lastname varchar(50)
