@@ -21,7 +21,9 @@ com\mthree\cardealership\dao\UserDaoDB$UserMapper.class
 com\mthree\cardealership\entities\Role.class
 com\mthree\cardealership\entities\Car.class
 com\mthree\cardealership\controller\ContactController.class
+com\mthree\cardealership\controller\UserController.class
 com\mthree\cardealership\dao\TransactionDao.class
+com\mthree\cardealership\dao\SpecialDao.class
 com\mthree\cardealership\entities\Make.class
 com\mthree\cardealership\entities\Contact.class
 com\mthree\cardealership\controller\CarController.class
@@ -32,3 +34,5 @@ com\mthree\cardealership\dao\MakeDaoDB$MakeMapper.class
 com\mthree\cardealership\CarDealerApplication.class
 com\mthree\cardealership\dao\CarModelDao.class
 com\mthree\cardealership\dao\CarModelDaoDB.class
+com\mthree\cardealership\dao\SpecialDaoDB.class
+com\mthree\cardealership\dao\SpecialDaoDB$SpecialMapper.class

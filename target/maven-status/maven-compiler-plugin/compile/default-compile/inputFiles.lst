@@ -5,7 +5,9 @@ C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\entities\User.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\dao\TransactionDao.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\dao\ContactDaoDB.java
+C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\controller\UserController.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\dao\TransactionDaoDB.java
+C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\dao\SpecialDaoDB.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\controller\TransactionController.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\entities\CarModel.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\service\UserDetailsServiceImpl.java
@@ -20,6 +22,7 @@ C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\entities\Role.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\dao\CarDaoDB.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\entities\UserRepository.java
+C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\dao\SpecialDao.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\entities\Special.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\dao\CarModelDaoDB.java
 C:\Users\conno\Documents\NetBeansProjects\CarDealership\src\main\java\com\mthree\cardealership\dao\MakeDaoDB.java

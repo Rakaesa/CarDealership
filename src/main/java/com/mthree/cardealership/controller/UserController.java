@@ -7,11 +7,14 @@ package com.mthree.cardealership.controller;
 
 import com.mthree.cardealership.dao.UserDao;
 import com.mthree.cardealership.entities.User;
+import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -35,6 +38,20 @@ public class UserController {
         User user = userDao.getUserById(id);
         model.addAttribute("user", user);
         return "edituser";
+    }
+    
+    @GetMapping("admin/adduser")
+    public String addUserGet(){
+        
+        return "adduser";
+    }
+    
+    @PostMapping("admin/adduser")
+    public String addUser(User user, HttpServletRequest request){
+        
+        userDao.addUser(user);
+
+        return "redirect:/users";        
     }
     
 }

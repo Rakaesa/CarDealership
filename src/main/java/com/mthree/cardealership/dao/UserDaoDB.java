@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -52,6 +54,34 @@ public class UserDaoDB implements UserDao{
         } catch (DataAccessException ex) {
             return null;
         }
+    }
+    
+    @Override
+    @Transactional
+    public User addUser(User user) {
+        
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        final String INSERT_COURSE = "INSERT INTO users(username, password, email, firstname, lastname) "
+                + "VALUES(?,?,?,?,?)";
+        jdbc.update(INSERT_COURSE,
+                user.getUsername(),
+                passwordEncoder.encode(user.getPassword()),
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName());
+
+        long newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        user.setId(newId);
+        return user;
+    }
+    
+    @Override
+    @Transactional
+    public void deleteUserById(int id) {
+        final String DELETE_USER_STUDENT = "DELETE FROM users WHERE id = ?";
+        jdbc.update(DELETE_USER_STUDENT, id);
+
     }
     
     public static final class UserMapper implements RowMapper<User> {

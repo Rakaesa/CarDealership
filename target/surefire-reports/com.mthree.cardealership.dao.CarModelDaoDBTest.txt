@@ -1,20 +1,20 @@
 -------------------------------------------------------------------------------
 Test set: com.mthree.cardealership.dao.CarModelDaoDBTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 4.117 s <<< FAILURE! - in com.mthree.cardealership.dao.CarModelDaoDBTest
-testAddAndGetCarModel  Time elapsed: 0.571 s  <<< ERROR!
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 3.933 s <<< FAILURE! - in com.mthree.cardealership.dao.CarModelDaoDBTest
+testAddAndGetCarModel  Time elapsed: 0.239 s  <<< ERROR!
 org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [INSERT INTO make(make, userid, dateAdded) VALUES(?, ? ,?)]; Cannot add or update a child row: a foreign key constraint fails (`cardealership`.`make`, CONSTRAINT `make_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`cardealership`.`make`, CONSTRAINT `make_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
 	at com.mthree.cardealership.dao.CarModelDaoDBTest.testAddAndGetCarModel(CarModelDaoDBTest.java:75)
 Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`cardealership`.`make`, CONSTRAINT `make_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
 	at com.mthree.cardealership.dao.CarModelDaoDBTest.testAddAndGetCarModel(CarModelDaoDBTest.java:75)
 
-testGetAllCarModels  Time elapsed: 0.007 s  <<< ERROR!
+testGetAllCarModels  Time elapsed: 0.008 s  <<< ERROR!
 org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [INSERT INTO make(make, userid, dateAdded) VALUES(?, ? ,?)]; Cannot add or update a child row: a foreign key constraint fails (`cardealership`.`make`, CONSTRAINT `make_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`cardealership`.`make`, CONSTRAINT `make_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
 	at com.mthree.cardealership.dao.CarModelDaoDBTest.testGetAllCarModels(CarModelDaoDBTest.java:99)
 Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`cardealership`.`make`, CONSTRAINT `make_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
 	at com.mthree.cardealership.dao.CarModelDaoDBTest.testGetAllCarModels(CarModelDaoDBTest.java:99)
 
-testDeleteCarModelById  Time elapsed: 0.006 s  <<< ERROR!
+testDeleteCarModelById  Time elapsed: 0.007 s  <<< ERROR!
 org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [INSERT INTO make(make, userid, dateAdded) VALUES(?, ? ,?)]; Cannot add or update a child row: a foreign key constraint fails (`cardealership`.`make`, CONSTRAINT `make_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`cardealership`.`make`, CONSTRAINT `make_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
 	at com.mthree.cardealership.dao.CarModelDaoDBTest.testDeleteCarModelById(CarModelDaoDBTest.java:133)
 Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`cardealership`.`make`, CONSTRAINT `make_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
