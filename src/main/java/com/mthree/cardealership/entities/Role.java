@@ -28,7 +28,8 @@ public class Role {
     public void setRole(String role) {
         this.role = role;
     }
-    
-    
-    
+
+    public void setId(Integer id) {
+        this.id = id;
+    }   
 }

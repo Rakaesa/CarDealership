@@ -1,5 +1,6 @@
 com\mthree\cardealership\dao\TransactionDaoDB$TransactionMapper.class
 com\mthree\cardealership\dao\ContactDaoDB.class
+com\mthree\cardealership\service\RESTAuthenticationEntryPoint.class
 com\mthree\cardealership\controller\TransactionController.class
 com\mthree\cardealership\dao\TransactionDaoDB.class
 com\mthree\cardealership\entities\Special.class

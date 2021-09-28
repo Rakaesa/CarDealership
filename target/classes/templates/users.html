@@ -41,8 +41,8 @@
                     <td th:text="${user.lastName}">Last Name</td>
                     <td th:text="${user.firstName}">First Name</td>
                     <td th:text="${user.email}">Email</td>
-                    <td th:text="${user.roles}">Role</td>
-                    <td><a href="#" th:href="@{/editUser(id=${user.id})}">Edit</a></td>
+                    <td th:text="${user.roles[0].role}">Role</td>
+                    <td><a href="#" th:href="@{/admin/editUser(id=${user.id})}">Edit</a></td>
                 </tr>
                 </tbody>
             </table>
