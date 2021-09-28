@@ -7,6 +7,7 @@ package com.mthree.cardealership.dao;
 
 import com.mthree.cardealership.entities.CarModel;
 import com.mthree.cardealership.entities.Make;
+import com.mthree.cardealership.entities.User;
 import java.time.LocalDate;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -30,6 +31,9 @@ public class CarModelDaoDBTest {
     
     @Autowired
     MakeDao makeDao;
+    
+    @Autowired
+    UserDao userDao;
     
     public CarModelDaoDBTest() {
     }
@@ -56,6 +60,11 @@ public class CarModelDaoDBTest {
             makeDao.deleteMakeById(make.getId());
         }
         
+        List<User> users = userDao.getAllUsers();
+        for(User user : users) {
+            userDao.deleteUserById(Math.toIntExact(user.getId()));
+        }
+        
     }
     
     @AfterEach
@@ -68,16 +77,22 @@ public class CarModelDaoDBTest {
     @Test
     public void testAddAndGetCarModel() {
         
+        User user = new User();
+        user.setUsername("user1");
+        user.setPassword("password");
+        user.setEmail("user1@test.com");
+        userDao.addUser(user);
+        
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
-        make.setUserID(123);
+        make.setUserID(Math.toIntExact(user.getId()));
         makeDao.addMake(make);
         
         CarModel carModel = new CarModel();
         carModel.setMakeID(make.getId());
         carModel.setModel("Bentayga");
-        carModel.setUserID(123);
+        carModel.setUserID(Math.toIntExact(user.getId()));
         carModel.setDateAdded(LocalDate.now());
         carModelDao.addCarModel(carModel);
         
@@ -92,23 +107,30 @@ public class CarModelDaoDBTest {
      */
     @Test
     public void testGetAllCarModels() {
+        
+        User user = new User();
+        user.setUsername("user1");
+        user.setPassword("password");
+        user.setEmail("user1@test.com");
+        userDao.addUser(user);
+        
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
-        make.setUserID(123);
+        make.setUserID(Math.toIntExact(user.getId()));
         makeDao.addMake(make);
         
         CarModel carModel = new CarModel();
         carModel.setMakeID(make.getId());
         carModel.setModel("Bentayga");
-        carModel.setUserID(123);
+        carModel.setUserID(Math.toIntExact(user.getId()));
         carModel.setDateAdded(LocalDate.now());
         carModelDao.addCarModel(carModel);
         
         CarModel carModel2 = new CarModel();
         carModel2.setMakeID(make.getId());
         carModel2.setModel("Continental GT");
-        carModel2.setUserID(456);
+        carModel2.setUserID(Math.toIntExact(user.getId()));
         carModel2.setDateAdded(LocalDate.now());
         carModelDao.addCarModel(carModel2);
         
@@ -126,16 +148,22 @@ public class CarModelDaoDBTest {
     @Test
     public void testDeleteCarModelById() {
         
+        User user = new User();
+        user.setUsername("user1");
+        user.setPassword("password");
+        user.setEmail("user1@test.com");
+        userDao.addUser(user);
+        
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
-        make.setUserID(123);
+        make.setUserID(Math.toIntExact(user.getId()));
         makeDao.addMake(make);
         
         CarModel carModel = new CarModel();
         carModel.setMakeID(make.getId());
         carModel.setModel("Bentayga");
-        carModel.setUserID(123);
+        carModel.setUserID(Math.toIntExact(user.getId()));
         carModel.setDateAdded(LocalDate.now());
         carModelDao.addCarModel(carModel);
         
