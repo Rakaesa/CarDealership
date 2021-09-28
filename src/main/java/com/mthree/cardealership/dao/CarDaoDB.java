@@ -60,7 +60,7 @@ public class CarDaoDB implements CarDao{
     private String description;
     private boolean isFeatured;
         */
-        final String INSERT_CAR = "INSERT INTO car(modelID, year, type, msrp, price, vin, interiorColor, transmission, color, bodyStyle,description, isFeatured) "
+        final String INSERT_CAR = "INSERT INTO car(modelID, year, type, msrp, price, vin, interior, trans, color, bodyStyle,description, featured) "
                 + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbc.update(INSERT_CAR,
                 c.getModelID(), c.getYear(), c.getType(), c.getMsrp(), c.getPrice(), c.getVin(), c.getInteriorColor(), c.getTransmission(), c.getColor(), c.getBodyStyle(), c.getDescription(), c.isIsFeatured());
@@ -101,15 +101,15 @@ public class CarDaoDB implements CarDao{
             car.setModelID(rs.getInt("modelID"));
             car.setYear(rs.getInt("year"));
             car.setType(rs.getString("type"));
-            car.setMsrp(rs.getDouble("msrp"));
+            car.setMsrp(rs.getDouble("mrsp"));
             car.setPrice(rs.getDouble("price"));
             car.setVin(rs.getString("vin"));
-            car.setInteriorColor(rs.getString("interiorColor"));
-            car.setTransmission(rs.getString("transmission"));
+            car.setInteriorColor(rs.getString("interior"));
+            car.setTransmission(rs.getString("trans"));
             car.setColor(rs.getString("color"));
             car.setBodyStyle(rs.getString("bodyStyle"));
             car.setDescription(rs.getString("description"));
-            car.setIsFeatured(rs.getBoolean("isFeatured"));
+            car.setIsFeatured(rs.getBoolean("featured"));
             return car;
         }
     }

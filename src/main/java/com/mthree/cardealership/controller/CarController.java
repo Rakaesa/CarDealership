@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
@@ -34,14 +35,19 @@ public class CarController {
     CarDaoDB dao;
 
     @GetMapping("car")
-    public List<Car> getAllCars() {
-        return dao.getAllCars();
+    public String getAllCars(Model model) {
+        List<Car> allCars = dao.getAllCars();
+        System.out.println(allCars);
+        model.addAttribute("cars", allCars);
+        return "car";
+        
     }
 
     @PostMapping("car")
     public String addCar(Car c) {
+        System.out.println(c);
         Car created = dao.addCar(c);
-        return created.toString();
+        return "car";
     }
 
     @GetMapping("car/{id}")

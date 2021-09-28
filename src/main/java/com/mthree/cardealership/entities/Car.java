@@ -11,6 +11,11 @@ public class Car {
     public Car(){
     
     }
+
+    @Override
+    public String toString() {
+        return "Car{" + "id=" + id + ", modelID=" + modelID + ", year=" + year + ", type=" + type + ", msrp=" + msrp + ", price=" + price + ", vin=" + vin + ", interiorColor=" + interiorColor + ", transmission=" + transmission + ", color=" + color + ", bodyStyle=" + bodyStyle + ", description=" + description + ", isFeatured=" + isFeatured + '}';
+    }
     public Car(int modelID, int year, String type, double msrp, double price, String vin, String interiorColor, String transmission, String color, String bodyStyle, String description, boolean isFeatured) {
         this.modelID = modelID;
         this.year = year;
