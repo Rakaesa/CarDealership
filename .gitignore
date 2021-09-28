@@ -26,3 +26,12 @@ target/classes/application.properties
 target/CarDealership-0.0.1-SNAPSHOT.jar.original
 target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/CarDealership-0.0.1-SNAPSHOT.jar.original
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+target/surefire-reports/TEST-com.mthree.cardealership.dao.MakeDaoDBTest.xml
+target/surefire-reports/com.mthree.cardealership.dao.MakeDaoDBTest.txt
+target/CarDealership-0.0.1-SNAPSHOT.jar.original
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst

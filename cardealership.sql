@@ -15,6 +15,7 @@ CREATE TABLE make(
     id INT PRIMARY KEY AUTO_INCREMENT,
     make VARCHAR(15) NOT NULL,
     userid int,
+    dateAdded date NOT NULL,
     foreign key (userid) references users(id)
 );
 
@@ -23,6 +24,7 @@ CREATE TABLE model(
     model VARCHAR(15) NOT NULL,
     makeid int,
     userid int,
+    dateAdded date NOT NULL,
     FOREIGN KEY (makeid) REFERENCES make(id),
     FOREIGN KEY (userid) REFERENCES users(id)
 );

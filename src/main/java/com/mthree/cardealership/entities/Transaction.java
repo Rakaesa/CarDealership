@@ -153,10 +153,5 @@ public class Transaction {
 
     public void setCar(Car car) {
         this.car = car;
-    }
-    
-    
-    
-    
-    
+    }    
 }

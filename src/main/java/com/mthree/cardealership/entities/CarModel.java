@@ -5,6 +5,7 @@
  */
 package com.mthree.cardealership.entities;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import org.springframework.stereotype.Component;
 
@@ -13,12 +14,13 @@ import org.springframework.stereotype.Component;
  * @author ychen
  */
 @Component
-public class Model {
+public class CarModel {
     
     private int id;
     private String model;
     private int makeID;
     private int userID;
+    private LocalDate dateAdded;
 
     public int getId() {
         return id;
@@ -52,6 +54,16 @@ public class Model {
         this.userID = userID;
     }
 
+    public LocalDate getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(LocalDate dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -73,7 +85,7 @@ public class Model {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Model other = (Model) obj;
+        final CarModel other = (CarModel) obj;
         if (this.id != other.id) {
             return false;
         }

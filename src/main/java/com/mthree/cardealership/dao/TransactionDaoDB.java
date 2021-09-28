@@ -5,7 +5,6 @@
  */
 package com.mthree.cardealership.dao;
 
-import com.mthree.cardealership.entities.Contact;
 import com.mthree.cardealership.entities.Transaction;
 import com.mthree.cardealership.entities.User;
 import java.sql.ResultSet;
@@ -16,11 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author conno
  */
+@Repository
 public class TransactionDaoDB implements TransactionDao {
     @Autowired
     JdbcTemplate jdbc;
