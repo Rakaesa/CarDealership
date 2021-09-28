@@ -5,6 +5,7 @@
  */
 package com.mthree.cardealership.dao;
 
+import com.mthree.cardealership.entities.Car;
 import com.mthree.cardealership.entities.Transaction;
 import com.mthree.cardealership.entities.User;
 import java.sql.ResultSet;
@@ -101,13 +102,13 @@ public class TransactionDaoDB implements TransactionDao {
     private User getUserForTransaction(int id) {
         final String SELECT_TEACHER_FOR_COURSE = "SELECT u.* FROM user u "
                 + "JOIN transactions t ON u.id = t.userid WHERE t.id = ?";
-        return jdbc.queryForObject(SELECT_TEACHER_FOR_COURSE, new UserMapper(), id);
+        return jdbc.queryForObject(SELECT_TEACHER_FOR_COURSE, new UserDaoDB.UserMapper(), id);
     }
 
     private Car getCarForTransaction(int id) {
         final String SELECT_STUDENTS_FOR_COURSE = "SELECT c.* FROM car c "
                 + "JOIN transactions t ON t.carid = c.id WHERE t.id = ?";
-        return jdbc.query(SELECT_STUDENTS_FOR_COURSE, new CarMapper(), id);
+        return jdbc.queryForObject(SELECT_STUDENTS_FOR_COURSE, new CarDaoDB.CarMapper(), id);
     }
 
     private void associateUserAndCar(List<Transaction> transactions) {
