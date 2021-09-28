@@ -43,11 +43,35 @@ public class CarController {
         
     }
 
-    @PostMapping("car")
-    public String addCar(Car c) {
+    @GetMapping("addcar")
+    public String showAddCarPage(){
+        return "addcar";
+    }
+    @PostMapping("addcar")
+    public String addCar(Car c, HttpServletRequest req) {
         System.out.println(c);
+        String year = req.getParameter("year");
+        String modelID = req.getParameter("modelId");
+        String type = req.getParameter("type");
+        String msrp = req.getParameter("msrp");
+        String price = req.getParameter("price");
+        String vin = req.getParameter("vin");
+        String interior = req.getParameter("interior");
+        c.setInteriorColor(interior);
+        c.setTransmission(req.getParameter("trans"));
+        c.setColor(req.getParameter("color"));
+        c.setBodyStyle(req.getParameter("bodyStyle"));
+        c.setDescription(req.getParameter("description"));
+        c.setIsFeatured(true);
+        c.setVin(vin);
+        c.setPrice(Double.parseDouble(price));
+        c.setMsrp(Double.parseDouble(msrp));
+        c.setType(type);
+        c.setModelID(Integer.parseInt(modelID));
+        c.setYear(Integer.parseInt(year));
         Car created = dao.addCar(c);
-        return "car";
+        
+        return "addcar";
     }
 
     @GetMapping("car/{id}")

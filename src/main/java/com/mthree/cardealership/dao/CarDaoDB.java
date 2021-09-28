@@ -60,7 +60,7 @@ public class CarDaoDB implements CarDao{
     private String description;
     private boolean isFeatured;
         */
-        final String INSERT_CAR = "INSERT INTO car(modelID, year, type, msrp, price, vin, interior, trans, color, bodyStyle,description, featured) "
+        final String INSERT_CAR = "INSERT INTO car(modelID, year, type, mrsp, price, vin, interior, trans, color, bodyStyle,description, featured) "
                 + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbc.update(INSERT_CAR,
                 c.getModelID(), c.getYear(), c.getType(), c.getMsrp(), c.getPrice(), c.getVin(), c.getInteriorColor(), c.getTransmission(), c.getColor(), c.getBodyStyle(), c.getDescription(), c.isIsFeatured());
