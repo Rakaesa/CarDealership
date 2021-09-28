@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="confirm_password" class="form-label">Password</label>
+                    <label for="confirm_password" class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" id="confirm_password" th:value="${user.password}"/>
                     <div th:if="${#fields.hasErrors('user.password')}">
                         <p th:each="error : ${#fields.errors('user.password')}"
