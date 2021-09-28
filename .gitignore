@@ -40,3 +40,7 @@ target/surefire-reports/com.mthree.cardealership.dao.CarModelDaoDBTest.txt
 target/surefire-reports/TEST-com.mthree.cardealership.dao.CarModelDaoDBTest.xml
 target/surefire-reports/TEST-com.mthree.cardealership.dao.CarModelDaoDBTest.xml
 target/surefire-reports/TEST-com.mthree.cardealership.dao.CarModelDaoDBTest.xml
+target/classes/templates/edituser.html
+target/classes/templates/addUser.html
+target/classes/templates/addUser.html
+target/classes/templates/makes.html
