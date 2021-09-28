@@ -75,14 +75,15 @@ public class CarController {
     }
 
     @GetMapping("car/{id}")
-    public String contactDetail(@PathVariable int id) {
+    public String contactDetail(@PathVariable int id, Model m) {
         Car c = dao.getCarById(id);
-        return c.toString();
+        m.addAttribute("car", c);
+        return "viewcar";
     }
 
-    @DeleteMapping("car")
-    public String deleteCarById(Integer id) {
+    @DeleteMapping("car/{id}")
+    public String deleteCarById(@PathVariable Integer id) {
         dao.deleteCarById(id);
-        return "Deleted!";
+        return "car";
     }
 }
