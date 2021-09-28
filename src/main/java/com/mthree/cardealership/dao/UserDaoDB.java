@@ -60,13 +60,13 @@ public class UserDaoDB implements UserDao{
     @Transactional
     public User addUser(User user) {
         
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
         final String INSERT_COURSE = "INSERT INTO users(username, password, email, firstname, lastname) "
                 + "VALUES(?,?,?,?,?)";
         jdbc.update(INSERT_COURSE,
                 user.getUsername(),
-                passwordEncoder.encode(user.getPassword()),
+                user.getPassword(),
                 user.getEmail(),
                 user.getFirstName(),
                 user.getLastName());

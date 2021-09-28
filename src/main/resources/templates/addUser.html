@@ -26,36 +26,21 @@
 
     <div class="row m-4 border border-dark">
         <div class="col-7 m-3">
-            <form class="row g-3" action="editUser" method="POST">
+            <form class="row g-3" action="/admin/adduser" method="POST">
                 <div class="col-md-6">
                     <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName">
-                    <div th:if="${#fields.hasErrors('user.firstName')}">
-                        <p th:each="error : ${#fields.errors('user.firstName')}"
-                           class="alert alert-danger" th:text="${error}">
-                            Bad name </p>
-                    </div>
+                    <input type="text" class="form-control" id="firstName" name="firstName">
                 </div>
 
                 <div class="col-md-6">
                     <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastName">
-                    <div th:if="${#fields.hasErrors('user.lastName')}">
-                        <p th:each="error : ${#fields.errors('user.lastName')}"
-                           class="alert alert-danger" th:text="${error}">
-                            Bad name </p>
-                    </div>
+                    <input type="text" class="form-control" id="lastName" name="lastName">
                 </div>
 
 
                 <div class="col-6">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email">
-                    <div th:if="${#fields.hasErrors('user.email')}">
-                        <p th:each="error : ${#fields.errors('user.email')}"
-                           class="alert alert-danger" th:text="${error}">
-                            Bad name </p>
-                    </div>
+                    <input type="email" class="form-control" id="email" name="email">
                 </div>
 
                 <div class="col-6">
@@ -68,22 +53,12 @@
 
                 <div class="col-md-6">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password">
-                    <div th:if="${#fields.hasErrors('user.password')}">
-                        <p th:each="error : ${#fields.errors('user.password')}"
-                           class="alert alert-danger" th:text="${error}">
-                            Bad name </p>
-                    </div>
+                    <input type="password" class="form-control" id="password" name="password">
                 </div>
 
                 <div class="col-md-6">
-                    <label for="confirm_password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="confirm_password">
-                    <div th:if="${#fields.hasErrors('user.password')}">
-                        <p th:each="error : ${#fields.errors('user.password')}"
-                           class="alert alert-danger" th:text="${error}">
-                            Bad name </p>
-                    </div>
+                    <label for="confirm_password" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                 </div>
 
                 <div class="col-12 mt-4">

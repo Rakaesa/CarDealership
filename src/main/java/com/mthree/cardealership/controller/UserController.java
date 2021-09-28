@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,9 +50,23 @@ public class UserController {
     @PostMapping("admin/adduser")
     public String addUser(User user, HttpServletRequest request){
         
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        
+        String username = "placeholder";
+        String password = passwordEncoder.encode(request.getParameter("password"));
+        String lastName = request.getParameter("lastName");
+        String firstName = request.getParameter("firstName");
+        String email = request.getParameter("email");
+        
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setLastName(lastName);
+        user.setFirstName(firstName);
+        user.setEmail(email);
+        
         userDao.addUser(user);
 
-        return "redirect:/users";        
+        return "redirect:/admin/users";        
     }
     
 }
