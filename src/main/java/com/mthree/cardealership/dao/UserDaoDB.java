@@ -48,8 +48,11 @@ public class UserDaoDB implements UserDao{
         @Override
         public User mapRow(ResultSet rs, int index) throws SQLException {
             User user = new User();
+            user.setId(rs.getLong("id"));
             user.setUsername(rs.getString("username"));
             user.setEmail(rs.getString("email"));
+            user.setFirstName(rs.getString("firstname"));
+            user.setLastName(rs.getString("lastname"));
             return user;
         }
     }
