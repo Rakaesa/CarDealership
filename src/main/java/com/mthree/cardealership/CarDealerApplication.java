@@ -15,6 +15,9 @@ public class CarDealerApplication {
     
     @Autowired
     ContactController contactController;
+    
+    @Autowired
+    TransactionController transactionController;
    
     
 	public static void main(String[] args) {
