@@ -6,6 +6,7 @@
 package com.mthree.cardealership.dao;
 
 import com.mthree.cardealership.entities.User;
+import java.util.List;
 
 /**
  *
@@ -14,5 +15,7 @@ import com.mthree.cardealership.entities.User;
 public interface UserDao {
     
     User getUserEmailById(int id);
+    
+    List<User> getAllUsers();
     
 }

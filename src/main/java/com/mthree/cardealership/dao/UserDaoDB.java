@@ -8,6 +8,7 @@ package com.mthree.cardealership.dao;
 import com.mthree.cardealership.entities.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,6 +34,13 @@ public class UserDaoDB implements UserDao{
         } catch (DataAccessException ex) {
             return null;
         }
+    }
+    
+    @Override
+    public List<User> getAllUsers() {
+        final String SELECT_ALL_USER = "SELECT * FROM users";
+        List<User> users = jdbc.query(SELECT_ALL_USER, new UserMapper());
+        return users;
     }
     
     public static final class UserMapper implements RowMapper<User> {
