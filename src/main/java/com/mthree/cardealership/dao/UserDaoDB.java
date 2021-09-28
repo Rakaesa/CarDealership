@@ -51,9 +51,8 @@ public class UserDaoDB implements UserDao{
     @Override
     public User getUserById(int id) {
         try {
-            final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
-            User user = jdbc.queryForObject(SELECT_USER_BY_ID, new UserMapper(), id);
-            return user;
+            final String SELECT_USER_BY_ID = "SELECT * FROM users JOIN user_roles ur ON ur.userId = users.Id WHERE id = ?";
+            return jdbc.queryForObject(SELECT_USER_BY_ID, new UserMapper(), id);
         } catch (DataAccessException ex) {
             return null;
         }
