@@ -65,9 +65,10 @@ public class UserDaoDB implements UserDao{
         
 
 
-        final String INSERT_COURSE = "INSERT INTO users(username, password, email, firstname, lastname) "
+        final String INSERT_USER = "INSERT INTO users(username, password, email, firstname, lastname) "
                 + "VALUES(?,?,?,?,?)";
-        jdbc.update(INSERT_COURSE,
+        final String INSERT_USER_ROLE = "INSERT INTO user_roles(userid, roleid) VALUES(?,?)";
+        jdbc.update(INSERT_USER,
                 user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
@@ -75,6 +76,8 @@ public class UserDaoDB implements UserDao{
                 user.getLastName());
 
         long newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        Set<Role> roles = user.getRoles();
+        jdbc.update(INSERT_USER_ROLE, newId, roles.stream().findFirst().get().getId());
         user.setId(newId);
         return user;
     }
