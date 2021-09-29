@@ -37,7 +37,14 @@ public class MakeService {
     }
     
     public Make addMake(Make make) {
-        return makeDao.addMake(make);
+        
+        Make fromDao = makeDao.getMakeByName(make.getMake());
+        
+        if (fromDao == null) {
+            return makeDao.addMake(make);
+        } else {
+            return fromDao;
+        }
     }
     
     public void deleteMakeById(int id) {

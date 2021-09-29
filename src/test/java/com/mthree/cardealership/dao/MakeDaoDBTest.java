@@ -75,13 +75,15 @@ public class MakeDaoDBTest {
         user.setUsername("user1");
         user.setPassword("password");
         user.setEmail("user1@test.com");
-        userDao.addUser(user);
+        //System.out.println("before assign ID: " + user.getId());
+        user.setId(userDao.addUser(user).getId());
+        System.out.println(user.getId());
         
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
         make.setUserID(Math.toIntExact(user.getId()));
-        makeDao.addMake(make);
+        make.setId(makeDao.addMake(make).getId());
         
         Make fromDao = makeDao.getMakeById(make.getId());
         assertEquals(make, fromDao);
@@ -99,25 +101,25 @@ public class MakeDaoDBTest {
         user.setUsername("user1");
         user.setPassword("password");
         user.setEmail("user1@test.com");
-        userDao.addUser(user);
+        user.setId(userDao.addUser(user).getId());
         
         User user2 = new User();
         user2.setUsername("user2");
         user2.setPassword("password");
         user2.setEmail("user2@test.com");
-        userDao.addUser(user2);
+        user2.setId(userDao.addUser(user2).getId());
         
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
         make.setUserID(Math.toIntExact(user.getId()));
-        makeDao.addMake(make);
+        make.setId(makeDao.addMake(make).getId());
         
         Make make2 = new Make();
         make2.setMake("Fiat");
         make2.setDateAdded(LocalDate.now());
         make2.setUserID(Math.toIntExact(user2.getId()));
-        makeDao.addMake(make2);
+        make2.setId(makeDao.addMake(make2).getId());
         
         List<Make> makes = makeDao.getAllMakes();
         
@@ -137,13 +139,13 @@ public class MakeDaoDBTest {
         user.setUsername("user1");
         user.setPassword("password");
         user.setEmail("user1@test.com");
-        userDao.addUser(user);
+        user.setId(userDao.addUser(user).getId());
         
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
         make.setUserID(Math.toIntExact(user.getId()));
-        makeDao.addMake(make);
+        make.setId(makeDao.addMake(make).getId());
         
         Make fromDao = makeDao.getMakeById(make.getId());
         assertEquals(make, fromDao);
@@ -165,13 +167,13 @@ public class MakeDaoDBTest {
         user.setUsername("user1");
         user.setPassword("password");
         user.setEmail("user1@test.com");
-        userDao.addUser(user);
+        user.setId(userDao.addUser(user).getId());
         
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
         make.setUserID(Math.toIntExact(user.getId()));
-        makeDao.addMake(make);
+        make.setId(makeDao.addMake(make).getId());
         
         String fromDao = makeDao.getMakeNameById(make.getId());
         assertEquals(make.getMake(), fromDao);
@@ -185,13 +187,13 @@ public class MakeDaoDBTest {
         user.setUsername("user1");
         user.setPassword("password");
         user.setEmail("user1@test.com");
-        userDao.addUser(user);
+        user.setId(userDao.addUser(user).getId());
         
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
         make.setUserID(Math.toIntExact(user.getId()));
-        makeDao.addMake(make);
+        make.setId(makeDao.addMake(make).getId());
         
         Make fromDao = makeDao.getMakeByName(make.getMake());
         assertEquals(make, fromDao);
