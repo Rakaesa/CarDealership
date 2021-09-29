@@ -11,6 +11,7 @@ import com.mthree.cardealership.entities.Car;
 import com.mthree.cardealership.entities.Contact;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +85,51 @@ public class CarController {
     @DeleteMapping("car/{id}")
     public String deleteCarById(@PathVariable Integer id) {
         dao.deleteCarById(id);
+        return "car";
+    }
+    
+    @GetMapping("car/below15")
+    public String viewCarsBelow15K(Model m){
+        List<Car> cars = dao.getAllCars().stream().filter(x -> x.getPrice() < 15000).collect(Collectors.toList());
+        m.addAttribute("cars", cars);
+        m.addAttribute("header", "Below 15K");
+        m.addAttribute("subheader", "Absolutely affordable");
+        return "car";
+    }
+    
+    @GetMapping("car/below25")
+    public String viewCarsBelow25K(Model m){
+        List<Car> cars = dao.getAllCars().stream().filter(x -> x.getPrice() < 25000).collect(Collectors.toList());
+        m.addAttribute("cars", cars);
+        m.addAttribute("header", "Below 25K");
+        m.addAttribute("subheader", "The sweet spot");
+        return "car";
+    }
+    
+    @GetMapping("car/above25")
+    public String viewCarsAbove25K(Model m){
+        List<Car> cars = dao.getAllCars().stream().filter(x -> x.getPrice() > 25000).collect(Collectors.toList());
+        m.addAttribute("cars", cars);
+        m.addAttribute("header", "Above 25K");
+        m.addAttribute("subheader", "Hey High Roller");
+        return "car";
+    }
+    
+    @GetMapping("car/new")
+    public String getNewCars(Model m){
+        List<Car> cars = dao.getAllCars().stream().filter(x -> x.getType().equalsIgnoreCase("new")).collect(Collectors.toList());
+        m.addAttribute("cars", cars);
+        m.addAttribute("header", "New Cars");
+        m.addAttribute("subheader", "Browse our brand new vehicles");
+        return "car";
+    }
+    
+    @GetMapping("car/used")
+    public String getUsedCars(Model m){
+        List<Car> cars = dao.getAllCars().stream().filter(x -> x.getType().equalsIgnoreCase("used")).collect(Collectors.toList());
+        m.addAttribute("cars", cars);
+        m.addAttribute("header", "Used Cars");
+        m.addAttribute("subheader", "Browse our fine used cars");
         return "car";
     }
 }
