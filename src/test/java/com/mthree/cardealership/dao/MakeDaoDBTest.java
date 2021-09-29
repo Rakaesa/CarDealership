@@ -77,7 +77,7 @@ public class MakeDaoDBTest {
         user.setEmail("user1@test.com");
         //System.out.println("before assign ID: " + user.getId());
         user.setId(userDao.addUser(user).getId());
-        System.out.println(user.getId());
+        //System.out.println(user.getId());
         
         Make make = new Make();
         make.setMake("Bentley");
