@@ -87,7 +87,15 @@ public class UserController {
         user.setLastName(lastName);
         user.setFirstName(firstName);
         user.setEmail(email);
-
+        
+        if (result.hasErrors()) {
+            List<Role> roles = roleDao.getAllRoles();
+            model.addAttribute("roles", roles);
+            model.addAttribute("flag", "Error");
+            model.addAttribute("user", user);
+            return "adduser";
+        }
+        
         Set<Role> roles = new HashSet<Role>();
         try {
             for (String r : rolesStr) {
