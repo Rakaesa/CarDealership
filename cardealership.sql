@@ -44,6 +44,7 @@ CREATE TABLE car(
     featured bool not null,
     modelid int,
     purchased boolean,
+    purchasedPrice double,
     FOREIGN KEY (modelid) REFERENCES model(id)
 );
 
