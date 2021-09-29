@@ -69,16 +69,6 @@ public class UserDaoDB implements UserDao{
             }
             prevUser = u;
             usersTemp.add(u);
-//            if(index+1 < users.size() && u.getId() == users.get(index + 1).getId()){
-//                user = u;
-//                roles.add(u.getRoles().iterator().next());
-//                roles.add(users.get(index+1).getRoles().iterator().next());
-//                user.setRoles(roles);
-//                usersTemp.set(index, user);
-//                usersTemp.remove(index + 1);
-//                index += 2;
-//                continue;
-//            }
             index++;
         }
         return usersTemp;

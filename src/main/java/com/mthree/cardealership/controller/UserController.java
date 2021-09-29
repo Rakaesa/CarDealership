@@ -70,7 +70,7 @@ public class UserController {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        String username = "placeholder";
+        String username = request.getParameter("username");
         String password = passwordEncoder.encode(request.getParameter("password"));
         String lastName = request.getParameter("lastName");
         String firstName = request.getParameter("firstName");
@@ -107,7 +107,7 @@ public class UserController {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        String username = "placeholder";
+        String username = request.getParameter("username");
         String password = passwordEncoder.encode(request.getParameter("password"));
         String lastName = request.getParameter("lastName");
         String firstName = request.getParameter("firstName");
