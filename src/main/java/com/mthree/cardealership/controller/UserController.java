@@ -5,6 +5,7 @@
  */
 package com.mthree.cardealership.controller;
 
+import com.mthree.cardealership.dao.RoleDao;
 import com.mthree.cardealership.dao.UserDao;
 import com.mthree.cardealership.entities.Role;
 import com.mthree.cardealership.entities.User;
@@ -30,6 +31,9 @@ public class UserController {
     @Autowired
     UserDao userDao;
     
+    @Autowired
+    RoleDao roleDao;
+    
     @GetMapping("admin/users")
     public String displayUsers(Model model) {
         List<User> users = userDao.getAllUsers();
@@ -42,12 +46,15 @@ public class UserController {
     public String editUser(Integer id, Model model) {
         User user = userDao.getUserById(id);
         model.addAttribute("user", user);
+        List<Role> roles = roleDao.getAllRoles();
+        model.addAttribute("roles", roles);
         return "edituser";
     }
     
     @GetMapping("admin/adduser")
-    public String addUserGet(){
-        
+    public String addUserGet(Model model){
+        List<Role> roles = roleDao.getAllRoles();
+        model.addAttribute("roles", roles);
         return "adduser";
     }
     
@@ -62,6 +69,8 @@ public class UserController {
         String firstName = request.getParameter("firstName");
         String email = request.getParameter("email");
         
+        String[] rolesStr = request.getParameterValues("role");
+        
         user.setUsername(username);
         user.setPassword(password);
         user.setLastName(lastName);
@@ -69,18 +78,10 @@ public class UserController {
         user.setEmail(email);
         
         Set<Role> roles = new HashSet<Role>();
-        Role role = new Role();
-        if(request.getParameter("role").equals("Admin")){
-            role.setId(2);
-            role.setRole("Admin");
+        for (String r : rolesStr) {
+            roles.add(roleDao.getRoleByName(r));
         }
-        else if(request.getParameter("role").equals("Sales")){
-            role.setId(1);
-            role.setRole("Sales");
-        }
-        roles.add(role);
-        user.setRoles(roles);
-        
+        user.setRoles(roles);        
         userDao.addUser(user);
 
         return "redirect:/admin/users";        

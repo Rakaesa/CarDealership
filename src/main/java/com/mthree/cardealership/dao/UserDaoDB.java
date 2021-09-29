@@ -45,6 +45,14 @@ public class UserDaoDB implements UserDao{
     public List<User> getAllUsers() {
         final String SELECT_ALL_USER = "SELECT * FROM users JOIN user_roles ur ON ur.userId = users.Id;";
         List<User> users = jdbc.query(SELECT_ALL_USER, new UserMapper());
+        User user = new User();
+        Set<Role> roles = new HashSet<Role>();
+        if(users.size() > 1){
+            user = users.get(0);
+            for(User u : users){
+                roles.add(u.getRoles().ifPresent(stream().findFirst()));
+            }
+        }
         return users;
     }
     
@@ -76,7 +84,8 @@ public class UserDaoDB implements UserDao{
 
         long newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         Set<Role> roles = user.getRoles();
-        jdbc.update(INSERT_USER_ROLE, newId, roles.stream().findFirst().get().getId());
+        for(Role r: roles)
+        jdbc.update(INSERT_USER_ROLE, newId, r.getId());
         user.setId(newId);
         return user;
     }

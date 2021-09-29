@@ -45,10 +45,11 @@
 
                         <div class="col-6">
                             <label for="role" class="form-label">Role</label>
-                            <select name="role" id="role" class="form-control">
-                                <option th:value="'Admin'" th:text="Admin"></option>
-                                <option th:value="'Sales'" th:text="Sales"></option>
-                            </select>
+                            <select multiple id="role" name="role" class="form-control">
+                            <option th:each="role : ${roles}"
+                                th:text="${role.role}">
+                            </option>
+                    </select>
                         </div>
 
                         <div class="col-md-6">
