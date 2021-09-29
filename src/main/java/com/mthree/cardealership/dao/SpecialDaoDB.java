@@ -71,7 +71,7 @@ public class SpecialDaoDB implements SpecialDao {
     public void deleteSpecialById(int id) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
-        final String DELETE_SPECIAL = "DELETE FROM special WHERE id = ?";
+        final String DELETE_SPECIAL = "DELETE FROM specials WHERE id = ?";
         jdbc.update(DELETE_SPECIAL, id);
     
     }

@@ -13,13 +13,13 @@
         <title></title>
 
         <!-- Bootstrap core CSS -->
-        <link href="index_files/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="index_files/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href="ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="index_files/jumbotron.css" rel="stylesheet">
+        <link href="jumbotron.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -40,10 +40,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="https://getbootstrap.com/docs/3.3/examples/jumbotron/#">Home</a>
-                    <a class="navbar-brand">New Inventory</a>
-                    <a class="navbar-brand">Used Inventory</a>
-                    <a class="navbar-brand">Specials</a>
-                    <a class="navbar-brand">Contact</a>
+                    <a class="navbar-brand" href="/car/new">New Inventory</a>
+                    <a class="navbar-brand" href="/car/used">Used Inventory</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <form class="navbar-form navbar-right">
@@ -62,58 +60,64 @@
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
             <div class="container">
-                <h1>New Cars</h1>
-                <p>Browse our Selection of Brand New Vehicles.</p>
+                <h1 th:text="${header}">New Cars</h1>
+                <p th:text="${subheader}"></p>
             </div>
         </div>
 
         <div class="container">
             <!-- Example row of columns -->
-            <div class="input-group">
-                <div class="form-outline">
-                    <input type="search" id="form1" class="form-control">
-                    <label class="form-label" for="form1">Search</label>
-                </div>
+            <div class="form-outline">
+                <input type="search" id="form1" class="form-control">
                 <button type="button" class="btn btn-primary">
                     Search
                 </button>
-
             </div>
-            <select class="form-select" aria-label="Default select example">
-                <option selected="">Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+
+
+            <select class="form-select" aria-label="Default select example" onchange="location = this.value;">
+                <option selected="">Price</option>
+                <a href="/below15"><option value="below15">Under 15,000</option></a>
+                <a href="/below25"><option value="below25">Under 25,000</option></a>
+                <a href="/above25"><option value="above25">Over 25,000</option></a>
             </select>
             <h1>Newest Vehicles</h1>
             <div class="row">
-                <tr th:each="car : ${cars}">      
-                    <div class="card mb-3" style="background-color: #D3D3D3">
-                        <img class="card-img-top" width="600" src="./car_files/2022-mitsubishi-outlander-24.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${car.vin}">Custom dosfaoisdjfmoas</h5>
-                            <p class="card-text" th:text="${car.id}"></p>
-                            <p class="card-text"><small class="text-muted" th:text="${car.description}">Last updated 3 mins ago</small></p>
+                <div class="card-deck">
+                    <div class="col d-flex justify-content-center" th:each="car : ${cars}">   
+                        <div class="card col-md-10 mb-3" width="40%" style="background-color: #D3D3D3">
+                            <div class="card-body row">
+                                <img class="col-md-6" width="200"  src="/2022-mitsubishi-outlander-24.jpg" alt="Card image cap">
+                                <p class="card-text col-md-6"><small class="text-muted" th:text="${car.description}">Last updated 3 mins ago</small></p></br>
+
+                                <h5 class="col-md-6 card-title" th:text="'VIN :' + ${car.vin}"></h5>
+                                <p class="card-text" th:text="'ID : ' + ${car.id}"></p>
+                                <span th:text="'Price ::  ' + ${car.price}"/></br>
+                                <span th:text="'MSRP ::  ' + ${car.msrp}"/></br>
+                               <span th:text="'Transmission ::  ' + ${car.transmission}"/>
+                               <a th:href="'/car/' + ${car.id}"><button class="btn btn-success">View Car</button></a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-            <hr>
+                <hr>
 
-            <footer>
-                <p>© 2016 Company, Inc.</p>
-            </footer>
-        </div> <!-- /container -->
+                <footer>
+                    <p>© 2016 Company, Inc.</p>
+                </footer>
+            </div> <!-- /container -->
 
 
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="index_files/jquery.min.js.download"></script>
-        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="index_files/bootstrap.min.js.download"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="index_files/ie10-viewport-bug-workaround.js.download"></script>
+            <!-- Bootstrap core JavaScript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <!--        <script src="jquery.min.js.download"></script>-->
+            <script
+                src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 
 
     </body></html>

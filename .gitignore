@@ -48,3 +48,4 @@ target/classes/templates/adminSpecials.html
 target/classes/templates/adminSpecials_files/limitedTimeOffer.png
 target/classes/templates/models.html
 target/surefire-reports/TEST-com.mthree.cardealership.dao.CarModelDaoDBTest.xml
+target/classes/static/limitedTimeOffer.png
