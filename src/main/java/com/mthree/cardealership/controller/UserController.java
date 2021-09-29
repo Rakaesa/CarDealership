@@ -14,10 +14,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -66,7 +70,7 @@ public class UserController {
     }
 
     @PostMapping("admin/editUser")
-    public String editUserPost(User user, HttpServletRequest request) {
+    public String editUserPost(User user, BindingResult result, HttpServletRequest request, Model model) {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -85,13 +89,24 @@ public class UserController {
         user.setEmail(email);
 
         Set<Role> roles = new HashSet<Role>();
-        for (String r : rolesStr) {
-            roles.add(roleDao.getRoleByName(r));
+        try {
+            for (String r : rolesStr) {
+                roles.add(roleDao.getRoleByName(r));
+            }
+        }
+        catch (NullPointerException e) {
+            result.rejectValue("roles", "noRoleTaken", "A role must be selected.");
+            return addUser(user, result, request, model);
         }
         user.setRoles(roles);
-        
-        userDao.editUser(user);
-        
+
+        try {
+            userDao.editUser(user);
+        } catch (DataIntegrityViolationException e) {
+            result.rejectValue("username", "usernameInUse", "Username is already taken.");
+            return addUser(user, result, request, model);
+        }
+
         return "redirect:/admin/users";
     }
 
@@ -103,7 +118,7 @@ public class UserController {
     }
 
     @PostMapping("admin/adduser")
-    public String addUser(User user, HttpServletRequest request) {
+    public String addUser(@Valid User user, BindingResult result, HttpServletRequest request, Model model) {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -121,12 +136,30 @@ public class UserController {
         user.setFirstName(firstName);
         user.setEmail(email);
 
+        if (result.hasErrors()) {
+            List<Role> roles = roleDao.getAllRoles();
+            model.addAttribute("roles", roles);
+            model.addAttribute("flag", "Error");
+            model.addAttribute("user", user);
+            return "adduser";
+        }
         Set<Role> roles = new HashSet<Role>();
-        for (String r : rolesStr) {
-            roles.add(roleDao.getRoleByName(r));
+        try {
+            for (String r : rolesStr) {
+                roles.add(roleDao.getRoleByName(r));
+            }
+        }
+        catch (NullPointerException e) {
+            result.rejectValue("roles", "noRoleTaken", "A role must be selected.");
+            return addUser(user, result, request, model);
         }
         user.setRoles(roles);
-        userDao.addUser(user);
+        try {
+            userDao.addUser(user);
+        } catch (DataIntegrityViolationException e) {
+            result.rejectValue("username", "usernameInUse", "Username is already taken.");
+            return addUser(user, result, request, model);
+        }
 
         return "redirect:/admin/users";
     }
