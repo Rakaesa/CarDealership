@@ -13,7 +13,7 @@ CREATE TABLE users(
 
 CREATE TABLE make(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    make VARCHAR(30) NOT NULL,
+    make VARCHAR(15) NOT NULL,
     userid int,
     dateAdded date NOT NULL,
     foreign key (userid) references users(id)
@@ -21,7 +21,7 @@ CREATE TABLE make(
 
 CREATE TABLE model(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    model VARCHAR(30) NOT NULL,
+    model VARCHAR(15) NOT NULL,
     makeid int,
     userid int,
     dateAdded date NOT NULL,
@@ -43,13 +43,14 @@ CREATE TABLE car(
     description varchar(255) not null,
     featured bool not null,
     modelid int,
+    purchased boolean,
     FOREIGN KEY (modelid) REFERENCES model(id)
 );
 
 CREATE TABLE specials(
     id INT primary key auto_increment,
-    title varchar(150) NOT NULL,
-    description varchar(1000) not null
+    title varchar(15) NOT NULL,
+    description varchar(255) not null
 );
 
 CREATE TABLE contact(
