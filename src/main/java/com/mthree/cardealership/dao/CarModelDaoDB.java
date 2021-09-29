@@ -61,6 +61,23 @@ public class CarModelDaoDB implements CarModelDao{
     }
 
     @Override
+    public CarModel getCarModelByNameAndMake(String name, String make) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            
+            final String SELECT_CARMODEL = "SELECT * FROM model JOIN make ON model.makeid = make.id " 
+                    + "WHERE model.model = ? AND make.make = ?";
+            CarModel carModel = jdbc.queryForObject(SELECT_CARMODEL, new CarModelMapper(), name, make);
+            return carModel;
+
+        } catch(DataAccessException ex) {
+            return null;
+        }
+    
+    }
+    
+    
+    @Override
     public List<CarModel> getAllCarModels() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         final String SELECT_ALL_CARMODEL = "SELECT * FROM model";
