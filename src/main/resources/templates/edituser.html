@@ -28,29 +28,35 @@
     <div class="row m-4 border border-dark">
         <div class="col-7 m-3">
             <form class="row g-3" action="editUser" method="POST">
+                <input type="text" class="form-control" id="id" name="id" hidden="true" th:value="${user.id}" required/>
+                <div class="col-md-12">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" th:value="${user.username}" required/>
+                </div>
                 <div class="col-md-6">
                     <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" th:value="${user.firstName}"/>
+                    <input type="text" class="form-control" id="firstName" name="firstName" th:value="${user.firstName}" required/>
                 </div>
 
 
                 <div class="col-md-6">
                     <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" th:value="${user.lastName}"/>
+                    <input type="text" class="form-control" id="lastName" name="lastName" th:value="${user.lastName}" required/>
                 </div>
 
 
                 <div class="col-6">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" th:value="${user.email}"/>
+                    <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" required/>
                 </div>
 
                 <div class="col-6">
                     <label for="role" class="form-label">Role</label>
-                    <select multiple id="role" name="role" class="form-control">
-                        <option th:each="role : ${roles}"
-                                th:text="${role.role}"
-                                th:selected="${user.roles.contains(role)}">
+                    <select multiple id="role" name="role" class="form-control" required>
+                        <option th:each="role : ${roleStr}"
+                                th:text="${role}"
+                                th:value="${role}"
+                                th:selected="${#arrays.contains(userRoles, role)}">
                             Role Name</option>
                     </select>
 

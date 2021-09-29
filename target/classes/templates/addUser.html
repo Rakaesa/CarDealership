@@ -24,30 +24,42 @@
                 </div>
             </div>
 
+            <div th:if="${flag}!=null">
+                            <p th:each="error : ${#fields.errors('user.username')}" class="alert alert-danger"
+                               th:text="${error}"> Username Taken </p>
+                            <p th:each="error: ${#fields.errors('user.roles')}" class="alert alert-danger" th:text="${error}">No role selected</p>
+                        </div>
+
+
             <div class="row m-4 border border-dark">
                 <div class="col-7 m-3">
                     <form class="row g-3" action="/admin/adduser" method="POST">
+                        <div class="col-md-12">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" th:value="${user?.username}" required/>
+                        </div>
                         <div class="col-md-6">
                             <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName">
+                            <input type="text" class="form-control" id="firstName" name="firstName" th:value="${user?.firstName}">
                         </div>
 
                         <div class="col-md-6">
                             <label for="lastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName">
+                            <input type="text" class="form-control" id="lastName" name="lastName" th:value="${user?.lastName}">
                         </div>
 
 
                         <div class="col-6">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control" id="email" name="email" th:value="${user?.email}">
                         </div>
 
                         <div class="col-6">
                             <label for="role" class="form-label">Role</label>
-                            <select name="role" id="role" class="form-control">
-                                <option th:value="'Admin'" th:text="Admin"></option>
-                                <option th:value="'Sales'" th:text="Sales"></option>
+                            <select multiple id="role" name="role" class="form-control">
+                                <option th:each="role : ${roles}"
+                                        th:text="${role.role}">
+                                </option>
                             </select>
                         </div>
 

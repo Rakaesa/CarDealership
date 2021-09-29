@@ -15,6 +15,7 @@ import java.util.List;
 public interface CarModelDao {
     
     CarModel getCarModelById(int id);
+    CarModel getCarModelByNameAndMake(String name, String make);
     List<CarModel> getAllCarModels();
     CarModel addCarModel(CarModel carModel);
     void deleteCarModelById(int id);

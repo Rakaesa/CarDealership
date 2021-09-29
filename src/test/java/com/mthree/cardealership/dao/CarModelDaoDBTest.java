@@ -81,20 +81,21 @@ public class CarModelDaoDBTest {
         user.setUsername("user1");
         user.setPassword("password");
         user.setEmail("user1@test.com");
-        userDao.addUser(user);
+        user.setId(userDao.addUser(user).getId());
         
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
         make.setUserID(Math.toIntExact(user.getId()));
-        makeDao.addMake(make);
+        make.setId(makeDao.addMake(make).getId());
         
         CarModel carModel = new CarModel();
         carModel.setMakeID(make.getId());
         carModel.setModel("Bentayga");
         carModel.setUserID(Math.toIntExact(user.getId()));
         carModel.setDateAdded(LocalDate.now());
-        carModelDao.addCarModel(carModel);
+        //carModelDao.addCarModel(carModel);
+        carModel.setId(carModelDao.addCarModel(carModel).getId());
         
         CarModel fromDao = carModelDao.getCarModelById(carModel.getId());
         assertEquals(carModel, fromDao);
@@ -112,27 +113,27 @@ public class CarModelDaoDBTest {
         user.setUsername("user1");
         user.setPassword("password");
         user.setEmail("user1@test.com");
-        userDao.addUser(user);
+        user.setId(userDao.addUser(user).getId());
         
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
         make.setUserID(Math.toIntExact(user.getId()));
-        makeDao.addMake(make);
+        make.setId(makeDao.addMake(make).getId());
         
         CarModel carModel = new CarModel();
         carModel.setMakeID(make.getId());
         carModel.setModel("Bentayga");
         carModel.setUserID(Math.toIntExact(user.getId()));
         carModel.setDateAdded(LocalDate.now());
-        carModelDao.addCarModel(carModel);
+        carModel.setId(carModelDao.addCarModel(carModel).getId());
         
         CarModel carModel2 = new CarModel();
         carModel2.setMakeID(make.getId());
         carModel2.setModel("Continental GT");
         carModel2.setUserID(Math.toIntExact(user.getId()));
         carModel2.setDateAdded(LocalDate.now());
-        carModelDao.addCarModel(carModel2);
+        carModel2.setId(carModelDao.addCarModel(carModel2).getId());
         
         List<CarModel> carModels = carModelDao.getAllCarModels();
         
@@ -152,20 +153,20 @@ public class CarModelDaoDBTest {
         user.setUsername("user1");
         user.setPassword("password");
         user.setEmail("user1@test.com");
-        userDao.addUser(user);
+        user.setId(userDao.addUser(user).getId());
         
         Make make = new Make();
         make.setMake("Bentley");
         make.setDateAdded(LocalDate.now());
         make.setUserID(Math.toIntExact(user.getId()));
-        makeDao.addMake(make);
+        make.setId(makeDao.addMake(make).getId());
         
         CarModel carModel = new CarModel();
         carModel.setMakeID(make.getId());
         carModel.setModel("Bentayga");
         carModel.setUserID(Math.toIntExact(user.getId()));
         carModel.setDateAdded(LocalDate.now());
-        carModelDao.addCarModel(carModel);
+        carModel.setId(carModelDao.addCarModel(carModel).getId());
         
         CarModel fromDao = carModelDao.getCarModelById(carModel.getId());
         assertEquals(carModel, fromDao);
@@ -175,6 +176,36 @@ public class CarModelDaoDBTest {
         fromDao = carModelDao.getCarModelById(carModel.getId());
         assertNull(fromDao);
         
+        
+    }
+    
+    @Test
+    public void testGetByModelAndMake() {
+        
+        User user = new User();
+        user.setUsername("user1");
+        user.setPassword("password");
+        user.setEmail("user1@test.com");
+        user.setId(userDao.addUser(user).getId());
+        
+        Make make = new Make();
+        make.setMake("Bentley");
+        make.setDateAdded(LocalDate.now());
+        make.setUserID(Math.toIntExact(user.getId()));
+        make.setId(makeDao.addMake(make).getId());
+        
+        CarModel carModel = new CarModel();
+        carModel.setMakeID(make.getId());
+        carModel.setModel("Bentayga");
+        carModel.setUserID(Math.toIntExact(user.getId()));
+        carModel.setDateAdded(LocalDate.now());
+        carModel.setId(carModelDao.addCarModel(carModel).getId());
+        
+        CarModel fromDao = carModelDao.getCarModelByNameAndMake(carModel.getModel(), make.getMake());
+        assertEquals(carModel, fromDao);
+        
+        fromDao = carModelDao.getCarModelByNameAndMake(carModel.getModel(), "NoBrand");
+        assertNull(fromDao);
         
     }
     
