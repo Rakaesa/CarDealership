@@ -27,13 +27,13 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class UserController {
-    
+
     @Autowired
     UserDao userDao;
-    
+
     @Autowired
     RoleDao roleDao;
-    
+
     @GetMapping("admin/users")
     public String displayUsers(Model model) {
         List<User> users = userDao.getAllUsers();
@@ -41,50 +41,94 @@ public class UserController {
         model.addAttribute("users", users);
         return "users";
     }
-    
+
     @GetMapping("admin/editUser")
     public String editUser(Integer id, Model model) {
         User user = userDao.getUserById(id);
         model.addAttribute("user", user);
         List<Role> roles = roleDao.getAllRoles();
         model.addAttribute("roles", roles);
+        String[] userRoles = new String[user.getRoles().size()];
+        String[] roleStr = new String[roles.size()];
+        int index = 0;
+        for (Role r : user.getRoles()) {
+            userRoles[index] = r.getRole();
+            index++;
+        }
+        index = 0;
+        model.addAttribute("userRoles", userRoles);
+        for (Role r : roles) {
+            roleStr[index] = r.getRole();
+            index++;
+        }
+        model.addAttribute("roleStr", roleStr);
         return "edituser";
     }
-    
-    @GetMapping("admin/adduser")
-    public String addUserGet(Model model){
-        List<Role> roles = roleDao.getAllRoles();
-        model.addAttribute("roles", roles);
-        return "adduser";
-    }
-    
-    @PostMapping("admin/adduser")
-    public String addUser(User user, HttpServletRequest request){
-        
+
+    @PostMapping("admin/editUser")
+    public String editUserPost(User user, HttpServletRequest request) {
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        
+
         String username = "placeholder";
         String password = passwordEncoder.encode(request.getParameter("password"));
         String lastName = request.getParameter("lastName");
         String firstName = request.getParameter("firstName");
         String email = request.getParameter("email");
-        
+
         String[] rolesStr = request.getParameterValues("role");
-        
+
         user.setUsername(username);
         user.setPassword(password);
         user.setLastName(lastName);
         user.setFirstName(firstName);
         user.setEmail(email);
-        
+
         Set<Role> roles = new HashSet<Role>();
         for (String r : rolesStr) {
             roles.add(roleDao.getRoleByName(r));
         }
-        user.setRoles(roles);        
+        user.setRoles(roles);
+        
+        userDao.editUser(user);
+        
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("admin/adduser")
+    public String addUserGet(Model model) {
+        List<Role> roles = roleDao.getAllRoles();
+        model.addAttribute("roles", roles);
+        return "adduser";
+    }
+
+    @PostMapping("admin/adduser")
+    public String addUser(User user, HttpServletRequest request) {
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        String username = "placeholder";
+        String password = passwordEncoder.encode(request.getParameter("password"));
+        String lastName = request.getParameter("lastName");
+        String firstName = request.getParameter("firstName");
+        String email = request.getParameter("email");
+
+        String[] rolesStr = request.getParameterValues("role");
+
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setLastName(lastName);
+        user.setFirstName(firstName);
+        user.setEmail(email);
+
+        Set<Role> roles = new HashSet<Role>();
+        for (String r : rolesStr) {
+            roles.add(roleDao.getRoleByName(r));
+        }
+        user.setRoles(roles);
         userDao.addUser(user);
 
-        return "redirect:/admin/users";        
+        return "redirect:/admin/users";
     }
-    
+
 }

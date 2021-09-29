@@ -9,6 +9,7 @@ import com.mthree.cardealership.entities.Role;
 import com.mthree.cardealership.entities.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,24 +44,62 @@ public class UserDaoDB implements UserDao{
     
     @Override
     public List<User> getAllUsers() {
-        final String SELECT_ALL_USER = "SELECT * FROM users JOIN user_roles ur ON ur.userId = users.Id;";
+        final String SELECT_ALL_USER = "SELECT * FROM users JOIN user_roles ur ON ur.userId = users.Id ORDER BY id;";
         List<User> users = jdbc.query(SELECT_ALL_USER, new UserMapper());
+        List<User> usersTemp = new ArrayList<User>();
+        User prevUser = new User();
         User user = new User();
-        Set<Role> roles = new HashSet<Role>();
-        if(users.size() > 1){
-            user = users.get(0);
-            for(User u : users){
-                roles.add(u.getRoles().ifPresent(stream().findFirst()));
+        Set<Role> roles;
+        Set<Role> tempRoles = new HashSet<Role>();
+        long tempId;
+        int index = 0;
+        for(User u: users){
+            
+            if(index == 0)
+            prevUser = u;
+            
+            if(index != 0 && users.iterator().hasNext() && user != null && prevUser.getId() == u.getId()){
+                roles = new HashSet<Role>(prevUser.getRoles());
+                roles.add(u.getRoles().iterator().next());
+                user = u;
+                user.setRoles(roles);
+                usersTemp.set(index-1, user);
+                prevUser = u;
+                continue;
             }
+            prevUser = u;
+            usersTemp.add(u);
+//            if(index+1 < users.size() && u.getId() == users.get(index + 1).getId()){
+//                user = u;
+//                roles.add(u.getRoles().iterator().next());
+//                roles.add(users.get(index+1).getRoles().iterator().next());
+//                user.setRoles(roles);
+//                usersTemp.set(index, user);
+//                usersTemp.remove(index + 1);
+//                index += 2;
+//                continue;
+//            }
+            index++;
         }
-        return users;
+        return usersTemp;
     }
     
     @Override
     public User getUserById(int id) {
         try {
             final String SELECT_USER_BY_ID = "SELECT * FROM users JOIN user_roles ur ON ur.userId = users.Id WHERE id = ?";
-            return jdbc.queryForObject(SELECT_USER_BY_ID, new UserMapper(), id);
+            List<User> users = jdbc.query(SELECT_USER_BY_ID, new UserMapper(), id);
+            Set<Role> roles = new HashSet<Role>();
+            User user = new User();
+            if(users.size()>1){
+                for(User u : users){
+                    roles.add(u.getRoles().iterator().next());                    
+                }
+            }
+            user = users.get(0);
+            if(roles.size()>0)
+                user.setRoles(roles);
+            return user;
         } catch (DataAccessException ex) {
             return null;
         }
@@ -88,6 +127,28 @@ public class UserDaoDB implements UserDao{
         jdbc.update(INSERT_USER_ROLE, newId, r.getId());
         user.setId(newId);
         return user;
+    }
+    
+    @Override
+    @Transactional
+    public User editUser(User user){
+        
+        final String EDIT_USER = "UPDATE users SET username = ?, password = ?, email = ?, firstname = ?, lastname = ? WHERE id = ?;";
+        final String WIPE_USER_ROLES = "DELETE FROM user_roles WHERE userid = ?";
+        final String INSERT_USER_ROLE = "INSERT INTO user_roles(userid, roleid) VALUES(?,?)";
+        
+        jdbc.update(EDIT_USER,
+                user.getUsername(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getId());
+        Set<Role> roles = user.getRoles();
+        jdbc.update(WIPE_USER_ROLES, user.getId());
+        for(Role r: roles)
+        jdbc.update(INSERT_USER_ROLE, user.getId(), r.getId());
+        return user;       
     }
     
     @Override

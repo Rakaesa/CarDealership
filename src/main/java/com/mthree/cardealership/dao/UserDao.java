@@ -18,6 +18,7 @@ public interface UserDao {
     User getUserById(int id);
     User addUser(User user);
     List<User> getAllUsers();
+    User editUser(User user);
     
     void deleteUserById(int id);
     

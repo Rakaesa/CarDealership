@@ -45,7 +45,7 @@
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td th:text="${user.roles[0].role}"></td>
+                                                <td th:each="role : ${user.roles}" th:text="${role.role}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
