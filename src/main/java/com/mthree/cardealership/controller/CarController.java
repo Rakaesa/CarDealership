@@ -36,8 +36,12 @@ public class CarController {
     
     @Autowired
     CarModelDao carModelDao;
-    
     @GetMapping("home/car")
+    public String redirectHomeCar(){
+        return "redirect:/sales/car";
+    }
+    
+    @GetMapping("sales/car")
     public String getAllCars(Model model) {
         List<Car> allCars = dao.getAllCars();
         System.out.println(allCars);
@@ -81,6 +85,8 @@ public class CarController {
     public String contactDetail(@PathVariable int id, Model m) {
         Car c = dao.getCarById(id);
         m.addAttribute("car", c);
+        CarModel carModelById = carModelDao.getCarModelById(c.getModelID());
+        m.addAttribute("model", carModelById.getModel());
         return "viewcar";
     }
 

@@ -81,7 +81,7 @@
             <h1>Newest Vehicles</h1>
             <div class="row">
                 <div class="card-deck">
-                    <div class="col d-flex justify-content-center" th:each="car : ${cars}">   
+                    <div class="col d-flex justify-content-center mb-3" th:each="car : ${cars}">   
                         <div class="card col-md-10 mb-3" width="40%" style="background-color: #D3D3D3">
                             <div class="card-body row">
                                 <img class="col-md-6" width="200"  src="/2022-mitsubishi-outlander-24.jpg" alt="Card image cap">
@@ -92,7 +92,7 @@
                                 <span th:text="'Price ::  ' + ${car.price}"/></br>
                                 <span th:text="'MSRP ::  ' + ${car.msrp}"/></br>
                                <span th:text="'Transmission ::  ' + ${car.transmission}"/>
-                               <a th:href="'/home/car/' + ${car.id}"><button class="btn btn-success">View Car</button></a>
+                               <a th:href="'/sales/makepurchase/' + ${car.id}"><button class="btn btn-success">Purchase Car</button></a>
                             </div>
                         </div>
                     </div>

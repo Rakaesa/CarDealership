@@ -6,6 +6,7 @@
 package com.mthree.cardealership.dao;
 
 import com.mthree.cardealership.entities.Car;
+import java.util.Collections;
 import java.util.List;
 import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Test;
@@ -66,6 +67,8 @@ public class CarDaoDBTest {
      */
     @Test
     public void testDeleteCarById() {
+        List<Car> all = dao.getAllCars();
+//        all.stream().max(x -> x.)
     }
 
     /**
