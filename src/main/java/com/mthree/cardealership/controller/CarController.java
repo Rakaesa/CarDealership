@@ -7,26 +7,20 @@ package com.mthree.cardealership.controller;
 
 import com.mthree.cardealership.dao.CarDaoDB;
 import com.mthree.cardealership.dao.CarModelDao;
-import com.mthree.cardealership.dao.ContactDao;
 import com.mthree.cardealership.dao.MakeDaoDB;
 import com.mthree.cardealership.entities.Car;
 import com.mthree.cardealership.entities.CarModel;
-import com.mthree.cardealership.entities.Contact;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
@@ -157,13 +151,13 @@ public class CarController {
         return "car";
     }
     
-    @GetMapping("/admin/car/edit/{id}")
+    @GetMapping("admin/car/edit/{id}")
     public String showEditPage(Model m,@PathVariable int id){
         Car carById = dao.getCarById(id);
         m.addAttribute("car", carById);
         return "editCar";
     }
-    @GetMapping("/admin/car/")
+    @GetMapping("admin/car")
     public String showAdminPage(Model m, HttpServletRequest request){
         List<Car> cars = dao.getAllCars();
         m.addAttribute("cars", cars);

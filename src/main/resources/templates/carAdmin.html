@@ -79,9 +79,9 @@
 
             <select class="form-select" aria-label="Default select example" onchange="location = this.value;">
                 <option selected="">Price</option>
-                <a href="/below15"><option value="below15">Under 15,000</option></a>
-                <a href="/below25"><option value="below25">Under 25,000</option></a>
-                <a href="/above25"><option value="above25">Over 25,000</option></a>
+                <a href="/home/car/below15"><option value="/home/car/below15">Under 15,000</option></a>
+                <a href="/home/car/below25"><option value="/home/car/below25">Under 25,000</option></a>
+                <a href="/home/car/above25"><option value="/home/car/above25">Over 25,000</option></a>
             </select>
             <h1>Newest Vehicles</h1>
             <div class="row">
@@ -97,7 +97,7 @@
                                 <span th:text="'Price ::  ' + ${car.price}"/></br>
                                 <span th:text="'MSRP ::  ' + ${car.msrp}"/></br>
                                <span th:text="'Transmission ::  ' + ${car.transmission}"/>
-                               <a th:href="'/car/edit/' + ${car.id}"><button class="btn btn-success">Edit Car</button></a>
+                               <a th:href="'/admin/car/edit/' + ${car.id}"><button class="btn btn-success">Edit Car</button></a>
                             </div>
                         </div>
                     </div>
