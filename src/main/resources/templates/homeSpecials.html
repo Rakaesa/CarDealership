@@ -24,6 +24,12 @@ and open the template in the editor.
                 
                 <h1>Specials</h1>
             </div>
+            
+        <div th:if="${#lists.isEmpty(specialList)}">
+            <hr>
+            <h3>There is currently no Special.</h3>
+            <span>Please check at a later time.</span>
+        </div>
         
             <div th:each="special : ${specialList}" class="row m-4 border border-dark pt-2">
                 <div class="col-3">
