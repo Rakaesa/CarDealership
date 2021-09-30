@@ -79,6 +79,7 @@ CREATE TABLE transactions(
     id INT primary key auto_increment,
     userid int,
     carid int,
+    purchasedate date null,
     purchaseprice double NOT NULL,
     purchasetype varchar(10) NOT NULL,
     name varchar(50) NOT NULL,
@@ -92,3 +93,9 @@ CREATE TABLE transactions(
 	FOREIGN KEY (userid) REFERENCES users(id),
     FOREIGN KEY (carid) REFERENCES car(id)
 );
+CREATE TABLE salesreport(
+    id INT primary key auto_increment,
+    name varchar(50) not null,
+    totalsales double not null,
+    totalvehicles int not null
+)
