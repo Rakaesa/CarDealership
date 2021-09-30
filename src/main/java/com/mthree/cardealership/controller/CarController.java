@@ -6,8 +6,11 @@
 package com.mthree.cardealership.controller;
 
 import com.mthree.cardealership.dao.CarDaoDB;
+import com.mthree.cardealership.dao.CarModelDao;
 import com.mthree.cardealership.dao.ContactDao;
+import com.mthree.cardealership.dao.MakeDaoDB;
 import com.mthree.cardealership.entities.Car;
+import com.mthree.cardealership.entities.CarModel;
 import com.mthree.cardealership.entities.Contact;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +37,13 @@ public class CarController {
     
     @Autowired
     CarDaoDB dao;
-
-    @GetMapping("car")
+    @Autowired
+    MakeDaoDB makeDao;
+    
+    @Autowired
+    CarModelDao carModelDao;
+    
+    @GetMapping("/home/car")
     public String getAllCars(Model model) {
         List<Car> allCars = dao.getAllCars();
         System.out.println(allCars);
@@ -44,11 +52,11 @@ public class CarController {
         
     }
 
-    @GetMapping("addcar")
+    @GetMapping("/admin/addcar")
     public String showAddCarPage(){
         return "addcar";
     }
-    @PostMapping("addcar")
+    @PostMapping("/admin/addcar")
     public String addCar(Car c, HttpServletRequest req) {
         System.out.println(c);
         String year = req.getParameter("year");
@@ -75,20 +83,20 @@ public class CarController {
         return "addcar";
     }
 
-    @GetMapping("car/{id}")
+    @GetMapping("/home/car/{id}")
     public String contactDetail(@PathVariable int id, Model m) {
         Car c = dao.getCarById(id);
         m.addAttribute("car", c);
         return "viewcar";
     }
 
-    @DeleteMapping("car/{id}")
+    @DeleteMapping("/admin/car/{id}")
     public String deleteCarById(@PathVariable Integer id) {
         dao.deleteCarById(id);
         return "car";
     }
     
-    @GetMapping("car/below15")
+    @GetMapping("/home/car/below15")
     public String viewCarsBelow15K(Model m){
         List<Car> cars = dao.getAllCars().stream().filter(x -> x.getPrice() < 15000).collect(Collectors.toList());
         m.addAttribute("cars", cars);
@@ -97,7 +105,7 @@ public class CarController {
         return "car";
     }
     
-    @GetMapping("car/below25")
+    @GetMapping("/home/car/below25")
     public String viewCarsBelow25K(Model m){
         List<Car> cars = dao.getAllCars().stream().filter(x -> x.getPrice() < 25000).collect(Collectors.toList());
         m.addAttribute("cars", cars);
@@ -106,7 +114,7 @@ public class CarController {
         return "car";
     }
     
-    @GetMapping("car/above25")
+    @GetMapping("/home/car/above25")
     public String viewCarsAbove25K(Model m){
         List<Car> cars = dao.getAllCars().stream().filter(x -> x.getPrice() > 25000).collect(Collectors.toList());
         m.addAttribute("cars", cars);
@@ -115,7 +123,7 @@ public class CarController {
         return "car";
     }
     
-    @GetMapping("car/new")
+    @GetMapping("/home/car/new")
     public String getNewCars(Model m){
         List<Car> cars = dao.getAllCars().stream().filter(x -> x.getType().equalsIgnoreCase("new")).collect(Collectors.toList());
         m.addAttribute("cars", cars);
@@ -124,12 +132,43 @@ public class CarController {
         return "car";
     }
     
-    @GetMapping("car/used")
+    @GetMapping("/home/car/used")
     public String getUsedCars(Model m){
         List<Car> cars = dao.getAllCars().stream().filter(x -> x.getType().equalsIgnoreCase("used")).collect(Collectors.toList());
         m.addAttribute("cars", cars);
         m.addAttribute("header", "Used Cars");
         m.addAttribute("subheader", "Browse our fine used cars");
         return "car";
+    }
+    
+    
+    @PostMapping("/home/car/search")
+    public String getResults(Model m, HttpServletRequest request){
+        List<Car> cars = dao.getAllCars();
+        List<Car> results = new ArrayList<Car>();
+        for (Car car : cars) {
+            CarModel model = carModelDao.getCarModelById(car.getModelID());
+            String comp = model.getModel() + makeDao.getMakeById(model.getMakeID()).getMake() + car.getYear(); 
+            if(comp.contains(request.getParameter("searchTerm"))){
+                results.add(car);
+            }
+        }
+        m.addAttribute("cars", results);
+        return "car";
+    }
+    
+    @GetMapping("/admin/car/edit/{id}")
+    public String showEditPage(Model m,@PathVariable int id){
+        Car carById = dao.getCarById(id);
+        m.addAttribute("car", carById);
+        return "editCar";
+    }
+    @GetMapping("/admin/car/")
+    public String showAdminPage(Model m, HttpServletRequest request){
+        List<Car> cars = dao.getAllCars();
+        m.addAttribute("cars", cars);
+        m.addAttribute("header", "Admin");
+        m.addAttribute("subheader", "Edit or Delete a car");
+        return "carAdmin";
     }
 }
