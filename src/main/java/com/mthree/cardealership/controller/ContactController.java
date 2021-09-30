@@ -7,11 +7,12 @@ package com.mthree.cardealership.controller;
 
 import com.mthree.cardealership.dao.ContactDao;
 import com.mthree.cardealership.entities.Contact;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -25,17 +26,20 @@ public class ContactController {
     @Autowired
     ContactDao contactDao;
 
-    @GetMapping("contacts")
-    public String displayContacts(Model model) {
-        List<Contact> contacts = contactDao.getAllContacts();
-        model.addAttribute("contacts", contacts);
-        return "admin/contacts";
+    @GetMapping("home/contactUs")
+    public String contactUs(Model model) {
+        return "contactUs";
     }
 
-    @PostMapping("addContact")
-    public String addCourse(Contact contact, HttpServletRequest request) {
+    @PostMapping("home/contactUs")
+    public String addContact(@Valid Contact contact, BindingResult result, HttpServletRequest request, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("flag", "Error");
+            return "contactUs";
+        }
         contactDao.addContact(contact);
-        return "redirect:/admin/contacts";
+        model.addAttribute("success","Thank you! We'll get back to you as soon as possible.");
+        return "contactUs";
     }
 
     @GetMapping("contactDetail")

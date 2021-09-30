@@ -21,6 +21,8 @@ public class Contact {
     private String message;
     
     //AT LEAST One of the following fields must be used.
+    @NotBlank(message = "Name must not be blank")
+    private String name;
     
     @NotBlank(message = "Email must not be blank")
     private String email;
@@ -59,7 +61,12 @@ public class Contact {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
-    
-    
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }   
 }

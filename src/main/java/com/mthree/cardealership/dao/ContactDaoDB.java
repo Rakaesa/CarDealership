@@ -42,9 +42,10 @@ public class ContactDaoDB implements ContactDao{
 
     @Override
     public Contact addContact(Contact contact) {
-        final String INSERT_CONTACT = "INSERT INTO contact(email, phone, message) "
-                + "VALUES(?,?,?)";
+        final String INSERT_CONTACT = "INSERT INTO contact(name, email, phone, message) "
+                + "VALUES(?,?,?,?)";
         jdbc.update(INSERT_CONTACT,
+                contact.getName(),
                 contact.getEmail(),
                 contact.getPhone(),
                 contact.getMessage());

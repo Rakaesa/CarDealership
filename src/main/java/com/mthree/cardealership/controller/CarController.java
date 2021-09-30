@@ -37,7 +37,7 @@ public class CarController {
     @Autowired
     CarModelDao carModelDao;
     
-    @GetMapping("/home/car")
+    @GetMapping("home/car")
     public String getAllCars(Model model) {
         List<Car> allCars = dao.getAllCars();
         System.out.println(allCars);
@@ -46,11 +46,11 @@ public class CarController {
         
     }
 
-    @GetMapping("/admin/addcar")
+    @GetMapping("admin/addcar")
     public String showAddCarPage(){
         return "addcar";
     }
-    @PostMapping("/admin/addcar")
+    @PostMapping("admin/addcar")
     public String addCar(Car c, HttpServletRequest req) {
         System.out.println(c);
         String year = req.getParameter("year");
@@ -77,20 +77,20 @@ public class CarController {
         return "addcar";
     }
 
-    @GetMapping("/home/car/{id}")
+    @GetMapping("home/car/{id}")
     public String contactDetail(@PathVariable int id, Model m) {
         Car c = dao.getCarById(id);
         m.addAttribute("car", c);
         return "viewcar";
     }
 
-    @DeleteMapping("/admin/car/{id}")
+    @DeleteMapping("admin/car/{id}")
     public String deleteCarById(@PathVariable Integer id) {
         dao.deleteCarById(id);
         return "car";
     }
     
-    @GetMapping("/home/car/below15")
+    @GetMapping("home/car/below15")
     public String viewCarsBelow15K(Model m){
         List<Car> cars = dao.getAllCars().stream().filter(x -> x.getPrice() < 15000).collect(Collectors.toList());
         m.addAttribute("cars", cars);
@@ -99,7 +99,7 @@ public class CarController {
         return "car";
     }
     
-    @GetMapping("/home/car/below25")
+    @GetMapping("home/car/below25")
     public String viewCarsBelow25K(Model m){
         List<Car> cars = dao.getAllCars().stream().filter(x -> x.getPrice() < 25000).collect(Collectors.toList());
         m.addAttribute("cars", cars);
@@ -108,7 +108,7 @@ public class CarController {
         return "car";
     }
     
-    @GetMapping("/home/car/above25")
+    @GetMapping("home/car/above25")
     public String viewCarsAbove25K(Model m){
         List<Car> cars = dao.getAllCars().stream().filter(x -> x.getPrice() > 25000).collect(Collectors.toList());
         m.addAttribute("cars", cars);
@@ -117,7 +117,7 @@ public class CarController {
         return "car";
     }
     
-    @GetMapping("/home/car/new")
+    @GetMapping("home/car/new")
     public String getNewCars(Model m){
         List<Car> cars = dao.getAllCars().stream().filter(x -> x.getType().equalsIgnoreCase("new")).collect(Collectors.toList());
         m.addAttribute("cars", cars);
@@ -126,7 +126,7 @@ public class CarController {
         return "car";
     }
     
-    @GetMapping("/home/car/used")
+    @GetMapping("home/car/used")
     public String getUsedCars(Model m){
         List<Car> cars = dao.getAllCars().stream().filter(x -> x.getType().equalsIgnoreCase("used")).collect(Collectors.toList());
         m.addAttribute("cars", cars);
@@ -136,7 +136,7 @@ public class CarController {
     }
     
     
-    @PostMapping("/home/car/search")
+    @PostMapping("home/car/search")
     public String getResults(Model m, HttpServletRequest request){
         List<Car> cars = dao.getAllCars();
         List<Car> results = new ArrayList<Car>();

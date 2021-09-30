@@ -7,6 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface SalesReportDao {
-
-    List<SalesReport> getSalesReports(User user, Date fromDate, Date toDate);
+    List<SalesReport> getAllSalesReports(Date fromDate, Date toDate);
+    List<SalesReport> getSalesReportsForUser(User user, Date fromDate, Date toDate);
 }

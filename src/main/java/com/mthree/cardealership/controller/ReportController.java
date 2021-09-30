@@ -1,15 +1,13 @@
 package com.mthree.cardealership.controller;
 
+import com.mthree.cardealership.dao.InventoryReportDao;
 import com.mthree.cardealership.dao.SalesReportDao;
 import com.mthree.cardealership.dao.TransactionDao;
 import com.mthree.cardealership.dao.UserDao;
-import com.mthree.cardealership.entities.Role;
+import com.mthree.cardealership.entities.InventoryReport;
 import com.mthree.cardealership.entities.SalesReport;
-import com.mthree.cardealership.entities.Transaction;
 import com.mthree.cardealership.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,9 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class ReportController {
@@ -34,12 +30,15 @@ public class ReportController {
     @Autowired
     SalesReportDao salesReportDao;
 
+    @Autowired
+    InventoryReportDao inventoryReportDao;
+
     @GetMapping("admin/reports/index")
     public String displayReports() {
         return "reports";
     }
 
-    @GetMapping("admin/reports/sales")
+    @GetMapping("admin/reports/sale")
     public String displaySalesReport(Model model) {
         List<User> users = userDao.getAllUsers();
         model.addAttribute("users", users);
@@ -48,17 +47,32 @@ public class ReportController {
 
     @GetMapping("admin/reports/inventory")
     public String displayInventoryReport(Model model) {
+        List<InventoryReport> newInventoryReports = inventoryReportDao.getNewInventoryReports();
+        List<InventoryReport> usedInventoryReports = inventoryReportDao.getUsedInventoryReports();
+        model.addAttribute("newinventories", newInventoryReports);
+        model.addAttribute("usedinventories", usedInventoryReports);
         return "inventoryReport";
     }
 
     @PostMapping("admin/reports/sales")
-    public List<SalesReport> displaySalesReport(@Valid User user, BindingResult result, HttpServletRequest request, Model model) {
-
+    public String displaySalesReport(@Valid User user, BindingResult result, HttpServletRequest request, Model model) {
+        List<SalesReport> salesReports;
         Date fromDate = Date.valueOf(request.getParameter("fromDate"));
         Date toDate= Date.valueOf(request.getParameter("toDate"));
-        String userId = request.getParameter("userid");
-        User selectedUser = userDao.getUserById(Integer.parseInt(userId));
 
-        return salesReportDao.getSalesReports(selectedUser, fromDate, toDate);
+        String allUsers = request.getParameter("all");
+
+        if(allUsers.equals("all")){
+            salesReports = salesReportDao.getAllSalesReports(fromDate, toDate);
+        }else{
+            String userId = request.getParameter("userid");
+            User selectedUser = userDao.getUserById(Integer.parseInt(userId));
+            salesReports = salesReportDao.getSalesReportsForUser(selectedUser, fromDate, toDate);
+        }
+
+        model.addAttribute("sales", salesReports);
+        List<User> users = userDao.getAllUsers();
+        model.addAttribute("users", users);
+        return "salesReport";
     }
 }
