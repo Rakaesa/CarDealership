@@ -80,6 +80,16 @@ public class CarDaoDB implements CarDao{
         jdbc.update(DELETE_CAR, id);
     }
     
+    public void updateCarByID(int id, String modelID, String year, String type, String mrsp, String price,String vin, String interior,String trans, String color, String bodyStyle,String description, String featured ){
+        if(featured.equalsIgnoreCase("true")){
+            featured = "1";
+        } else {
+            featured = "0";
+        }
+        final String UPDATE_CAR = "UPDATE CAR SET modelID = ?, "
+                + "year = ? , type = ? , mrsp = ? , price = ? , vin = ? , interior = ? , trans = ? , color = ? , bodyStyle = ? ,description = ? , featured  = ?  WHERE ID = ? ";
+        jdbc.update(UPDATE_CAR, modelID, year, type, mrsp, price, vin, interior, trans, color, bodyStyle, description, featured, id);
+    }
     public static final class CarMapper implements RowMapper<Car> {
 
         

@@ -157,6 +157,36 @@ public class CarController {
         m.addAttribute("car", carById);
         return "editCar";
     }
+    
+    @PostMapping("admin/car/edit/{id}")
+    public String handleEditPage(Model m, @PathVariable int id, HttpServletRequest req){
+        Car c = dao.getCarById(id);
+        String year = req.getParameter("year");
+        String modelID = req.getParameter("modelId");
+        String type = req.getParameter("type");
+        String msrp = req.getParameter("msrp");
+        String price = req.getParameter("price");
+        String vin = req.getParameter("vin");
+        String interior = req.getParameter("interior");
+        c.setInteriorColor(interior);
+        c.setTransmission(req.getParameter("trans"));
+        c.setColor(req.getParameter("color"));
+        c.setBodyStyle(req.getParameter("bodyStyle"));
+        c.setDescription(req.getParameter("description"));
+        String isFeaturedString = req.getParameter("isFeatured");
+        boolean isFeautred = Boolean.parseBoolean(isFeaturedString.toLowerCase());
+        c.setIsFeatured(isFeautred);
+        c.setVin(vin);
+        c.setPrice(Double.parseDouble(price));
+        c.setMsrp(Double.parseDouble(msrp));
+        c.setType(type);
+        c.setModelID(Integer.parseInt(modelID));
+        c.setYear(Integer.parseInt(year));
+        dao.updateCarByID(id, modelID, year, type, msrp, price, vin, interior, c.getTransmission(), c.getColor(), c.getBodyStyle(), c.getDescription(), String.valueOf(c.isIsFeatured()));
+        c = dao.getCarById(id);
+        m.addAttribute("car", c);
+        return "editCar";
+    }
     @GetMapping("admin/car")
     public String showAdminPage(Model m, HttpServletRequest request){
         List<Car> cars = dao.getAllCars();

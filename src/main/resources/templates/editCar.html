@@ -11,6 +11,8 @@
         <title>Car Manager</title>
     </head>
     <body>
+        <head th:replace="common-header :: common-header" />
+
         <!-- Main Body of Page -->
         <div class="container">
             <div class="row m-4">
@@ -26,7 +28,7 @@
 
             <div class="row m-4 border border-dark">
                 <div class="col-7 m-3">
-                    <form class="row g-3" action="/admin/car/edit/" method="POST">
+                    <form class="row g-3" th:action="'/admin/car/edit/'+${car.id}" method="POST">
 
                         <div class="col-md-6">
                             <label for="price" class="form-label">Price</label>
@@ -86,7 +88,7 @@
 
                         <div class="col-6">
                             <label for="email" class="form-label">Featured</label>
-                            <select class="form-select">isFeatured<option th:selected="${car.isFeatured == true}">True</option><option th:selected="${car.isFeatured == false}">False</option></select>
+                            <select class="form-select" name="isFeatured" id="isFeatured">isFeatured<option th:selected="${car.isFeatured == true}">True</option><option th:selected="${car.isFeatured == false}">False</option></select>
 <!--                            <select>False</select>-->
 <!--                            <input class="form-control" id="featured" th:value="${car.isFeatured}" name="featured">-->
                         </div>
