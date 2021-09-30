@@ -1,28 +1,28 @@
 -------------------------------------------------------------------------------
 Test set: com.mthree.cardealership.dao.CarModelDaoDBTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 4.617 s <<< FAILURE! - in com.mthree.cardealership.dao.CarModelDaoDBTest
-testAddAndGetCarModel  Time elapsed: 0.337 s  <<< ERROR!
-org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [DELETE FROM users WHERE id = ?]; Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
-	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:65)
-Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
-	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:65)
+Tests run: 4, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 7.242 s <<< FAILURE! - in com.mthree.cardealership.dao.CarModelDaoDBTest
+testAddAndGetCarModel  Time elapsed: 0.288 s  <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [DELETE FROM model WHERE id = ?]; Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`))
+	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:55)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`))
+	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:55)
 
-testGetAllCarModels  Time elapsed: 0.017 s  <<< ERROR!
-org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [DELETE FROM users WHERE id = ?]; Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
-	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:65)
-Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
-	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:65)
+testGetAllCarModels  Time elapsed: 0.011 s  <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [DELETE FROM model WHERE id = ?]; Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`))
+	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:55)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`))
+	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:55)
 
 testGetByModelAndMake  Time elapsed: 0.011 s  <<< ERROR!
-org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [DELETE FROM users WHERE id = ?]; Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
-	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:65)
-Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
-	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:65)
+org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [DELETE FROM model WHERE id = ?]; Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`))
+	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:55)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`))
+	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:55)
 
-testDeleteCarModelById  Time elapsed: 0.01 s  <<< ERROR!
-org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [DELETE FROM users WHERE id = ?]; Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
-	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:65)
-Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`user_roles`, CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`))
-	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:65)
+testDeleteCarModelById  Time elapsed: 0.011 s  <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [DELETE FROM model WHERE id = ?]; Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`)); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`))
+	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:55)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cardealership`.`car`, CONSTRAINT `car_ibfk_1` FOREIGN KEY (`modelid`) REFERENCES `model` (`id`))
+	at com.mthree.cardealership.dao.CarModelDaoDBTest.setUp(CarModelDaoDBTest.java:55)
 
