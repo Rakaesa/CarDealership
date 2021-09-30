@@ -79,7 +79,7 @@ CREATE TABLE transactions(
     id INT primary key auto_increment,
     userid int,
     carid int,
-    purchasedate date not null,
+    purchasedate date null,
     purchaseprice double NOT NULL,
     purchasetype varchar(10) NOT NULL,
     name varchar(50) NOT NULL,
@@ -93,7 +93,6 @@ CREATE TABLE transactions(
 	FOREIGN KEY (userid) REFERENCES users(id),
     FOREIGN KEY (carid) REFERENCES car(id)
 );
-
 CREATE TABLE salesreport(
     id INT primary key auto_increment,
     name varchar(50) not null,
@@ -101,11 +100,8 @@ CREATE TABLE salesreport(
     totalvehicles int not null
 );
 
-CREATE TABLE inventoryreport(
-    id INT primary key auto_increment,
-    year int not null,
-    make varchar(50) not null,
-    model varchar(50) not null,
-    count int not null,
-    stockvalue double not null
-)
+INSERT INTO roles VALUES("ADMIN");
+INSERT INTO ROLES VALUES("SALES");
+INSERT INTO users(username, password, email, firstname, lastname) VALUES("Admin", "$2a$10$1iyV.QqFFG/NSCrlYRzWfumIPjDRmU4K6MQy7B2dOdo/t6jFfbYwW", "admin@gmail.com", "Admin", "Admin");
+INSERT INTO user_roles VALUES(1, 1);
+INSERT INTO user_roles VALUES(1, 2);
