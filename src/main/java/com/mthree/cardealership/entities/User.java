@@ -5,8 +5,12 @@
  */
 package com.mthree.cardealership.entities;
 
+import com.mthree.cardealership.service.ValidPassword;
 import java.util.*; 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import org.passay.*;
+
 
 @Entity
 @Table(name = "users")
@@ -20,7 +24,9 @@ public class User {
     @Column(name = "username")
     private String username;
     
+    @ValidPassword
     @Column(name = "password")
+    @NotBlank(message="Password is mandatory")
     private String password;
     
     @Column(name = "firstname")

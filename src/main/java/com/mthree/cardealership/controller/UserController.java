@@ -9,7 +9,6 @@ import com.mthree.cardealership.dao.RoleDao;
 import com.mthree.cardealership.dao.UserDao;
 import com.mthree.cardealership.entities.Role;
 import com.mthree.cardealership.entities.User;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,9 +20,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 
 /**
  *
@@ -75,7 +74,6 @@ public class UserController {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         String username = request.getParameter("username");
-        String password = passwordEncoder.encode(request.getParameter("password"));
         String lastName = request.getParameter("lastName");
         String firstName = request.getParameter("firstName");
         String email = request.getParameter("email");
@@ -83,11 +81,18 @@ public class UserController {
         String[] rolesStr = request.getParameterValues("role");
 
         user.setUsername(username);
-        user.setPassword(password);
         user.setLastName(lastName);
         user.setFirstName(firstName);
         user.setEmail(email);
         
+        if (request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
+            String password = passwordEncoder.encode(request.getParameter("password"));
+            user.setPassword(password);
+        } else {
+            model.addAttribute("passErr", "Your passwords do not match!");
+            return "edit";
+        }
+
         if (result.hasErrors()) {
             List<Role> roles = roleDao.getAllRoles();
             model.addAttribute("roles", roles);
@@ -95,14 +100,13 @@ public class UserController {
             model.addAttribute("user", user);
             return "adduser";
         }
-        
+
         Set<Role> roles = new HashSet<Role>();
         try {
             for (String r : rolesStr) {
                 roles.add(roleDao.getRoleByName(r));
             }
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             result.rejectValue("roles", "noRoleTaken", "A role must be selected.");
             return addUser(user, result, request, model);
         }
@@ -131,7 +135,6 @@ public class UserController {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         String username = request.getParameter("username");
-        String password = passwordEncoder.encode(request.getParameter("password"));
         String lastName = request.getParameter("lastName");
         String firstName = request.getParameter("firstName");
         String email = request.getParameter("email");
@@ -139,10 +142,17 @@ public class UserController {
         String[] rolesStr = request.getParameterValues("role");
 
         user.setUsername(username);
-        user.setPassword(password);
         user.setLastName(lastName);
         user.setFirstName(firstName);
         user.setEmail(email);
+
+        if (request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
+            String password = passwordEncoder.encode(request.getParameter("password"));
+            user.setPassword(password);
+        } else {
+            model.addAttribute("passErr", "Your passwords do not match!");
+            return "adduser";
+        }
 
         if (result.hasErrors()) {
             List<Role> roles = roleDao.getAllRoles();
@@ -151,13 +161,13 @@ public class UserController {
             model.addAttribute("user", user);
             return "adduser";
         }
+
         Set<Role> roles = new HashSet<Role>();
         try {
             for (String r : rolesStr) {
                 roles.add(roleDao.getRoleByName(r));
             }
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             result.rejectValue("roles", "noRoleTaken", "A role must be selected.");
             return addUser(user, result, request, model);
         }
@@ -170,6 +180,35 @@ public class UserController {
         }
 
         return "redirect:/admin/users";
+    }
+
+    @GetMapping("account/changepassword")
+    public String changePasswordGet(Model model) {
+
+        return "changepassword";
+    }
+
+    @PostMapping("account/changepassword")
+    public String changePassword(Model model, HttpServletRequest request, @CurrentSecurityContext(expression = "authentication?.name") String username) {
+
+//        if (result.hasErrors()) {
+//            List<Role> roles = roleDao.getAllRoles();
+//            model.addAttribute("flag", "Error");
+//            return "changepassword";
+//        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        if (request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
+            String password = passwordEncoder.encode(request.getParameter("password"));
+            User user = userDao.getUserByUsername(username);
+            user.setPassword(password);
+            userDao.editUser(user);
+
+            return "redirect:/index";
+        } else {
+            model.addAttribute("passErr", "Your passwords do not match!");
+            return "changepassword";
+        }
     }
 
 }

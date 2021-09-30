@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>Car Manager</title>
+    </head>
+    <body>
+        <!-- Main Body of Page -->
+        <div class="container">
+            <div class="row m-4">
+                <div class="col text-center border border-dark">
+                    <h1><a href="/" class="text-dark">Car Manager</a></h1>
+                </div>
+            </div>
+            <div class="row m-4 border border-dark">
+                <div class="col m-3">
+                    <h2>Add Car</h2>
+                </div>
+            </div>
+
+            <div class="row m-4 border border-dark">
+                <div class="col-7 m-3">
+                    <form class="row g-3" action="/admin/car/edit/" method="POST">
+
+                        <div class="col-md-6">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="price" th:value="${car.price}" name="price">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="msrp" class="form-label">MSRP</label>
+                            <input type="number" class="form-control" id="mrsp" th:value="${car.msrp}" name="msrp">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="firstName" class="form-label">Year</label>
+                            <input type="text" class="form-control" id="year" th:value="${car.year}" name="year">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="lastName" class="form-label">modelId</label>
+                            <input type="text" class="form-control" id="modelId" th:value="${car.modelID}" name="modelId">
+                        </div>
+
+
+                        <div class="col-6">
+                            <label for="email" class="form-label">Type</label>
+                            <input class="form-control" id="type" th:value="${car.type}" name="type">
+                        </div>
+
+                        <div class="col-6">
+                            <label for="email" class="form-label">VIN</label>
+                            <input class="form-control" id="vin" th:value="${car.vin}" name="vin">
+                        </div>
+
+
+                        <div class="col-6">
+                            <label for="email" class="form-label">interior</label>
+                            <input class="form-control" id="interior" th:value="${car.interiorColor}" name="interior">
+                        </div>
+
+                        <div class="col-6">
+                            <label for="email" class="form-label">trans</label>
+                            <input class="form-control" id="trans" th:value="${car.transmission}" name="trans">
+                        </div>
+
+                        <div class="col-6">
+                            <label for="email" class="form-label">color</label>
+                            <input class="form-control" id="color" th:value="${car.color}" name="color">
+                        </div>
+
+                        <div class="col-6">
+                            <label for="email" class="form-label">bodyStyle</label>
+                            <input class="form-control" id="bodyStyle" th:value="${car.bodyStyle}" name="bodyStyle">
+                        </div>
+
+                        <div class="col-6">
+                            <label for="email" class="form-label">Description</label>
+                            <input class="form-control" id="description" th:value="${car.description}" name="description">
+                        </div>
+
+                        <div class="col-6">
+                            <label for="email" class="form-label">Featured</label>
+                            <select class="form-select">isFeatured<option th:selected="${car.isFeatured == true}">True</option><option th:selected="${car.isFeatured == false}">False</option></select>
+<!--                            <select>False</select>-->
+<!--                            <input class="form-control" id="featured" th:value="${car.isFeatured}" name="featured">-->
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End main body -->
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

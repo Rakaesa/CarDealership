@@ -176,4 +176,25 @@ public class UserDaoDB implements UserDao{
         }
     }
     
+    @Override
+    public User getUserByUsername(String us) {
+        try {
+            final String SELECT_USER_BY_ID = "SELECT * FROM users JOIN user_roles ur ON ur.userId = users.Id WHERE username = ?";
+            List<User> users = jdbc.query(SELECT_USER_BY_ID, new UserMapper(), us);
+            Set<Role> roles = new HashSet<Role>();
+            User user = new User();
+            if(users.size()>1){
+                for(User u : users){
+                    roles.add(u.getRoles().iterator().next());                    
+                }
+            }
+            user = users.get(0);
+            if(roles.size()>0)
+                user.setRoles(roles);
+            return user;
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+    
 }

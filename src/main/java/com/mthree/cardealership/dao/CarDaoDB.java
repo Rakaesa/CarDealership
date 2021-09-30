@@ -38,7 +38,11 @@ public class CarDaoDB implements CarDao{
 
     @Override
     public List<Car> getAllCars() {
-        final String SELECT_ALL_CARS = "SELECT * FROM car";
+        final String SELECT_ALL_CARS = "SELECT car.id as id, year, type, mrsp, price, vin, interior, trans, color, bodystyle," +
+" description, featured, make, model, modelid from cardealership.car car" +
+" JOIN cardealership.model mdl on car.modelid = mdl.id" +
+" JOIN cardealership.make on mdl.makeid = cardealership.make.id";
+        
         List<Car> cars = jdbc.query(SELECT_ALL_CARS, new CarMapper());
         return cars;
     }
