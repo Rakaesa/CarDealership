@@ -27,16 +27,31 @@ and open the template in the editor.
         
         <div class="row m-4 border border-dark">
                 <div class="col-7 text-center m-3">
-                    <form action="makes" method="POST">
-                        <div class="form-group row">
-
-                            <label for="makeName" class="col-3 col-form-label font-weight-bold">
-                                Placeholder for vehicle detail</label>
-                            <input type="text" name="makeName" required
-                                       id="makeName" class="form-control col-6"/>
-                        
+                        <div class= "row">
+                            <label for="carTitle" class="col-5 font-weight-bold">
+                                Placeholder for vehicle detail</label>                
                         </div>
-                    </form>
+                    
+                    <div class= "row">
+                                        <div class="col-3">
+                    <img src="/2022-mitsubishi-outlander-24.jpg" class="img-fluid">
+                </div>
+                <div class="col-9">
+ 
+                        <div class="row">
+
+                        <label th:text="${car.year}" class="col-3 col-form-label font-weight-bold">
+                                Special Title</label>
+                        <input th:value="${car.id}" type="hidden" name="carId"/>   
+                       
+                        </div>
+                        <div class="row">
+           
+                        </div>
+            </div>
+                    </div>
+                    
+                    
                 </div>
             </div>
         
