@@ -1,6 +1,13 @@
 package com.mthree.cardealership.entities;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -205,18 +212,60 @@ public class Car {
         }
         return true;
     }
+    
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(name = "modelid")
+    @NotNull(message="Model ID cannot be null")
     private int modelID;
+    
+    @Column(name = "year")
+    @NotNull(message="Year cannot be null")
     private int year;
+    
+    @Column(name = "type")
+    @NotBlank(message="Type cannot be null")
+    @Size(max = 5, message = "Type cannot be more than 5 characters long")
     private String type;
+    
+    @Column(name = "mrsp")
+    @NotNull(message="MRSP Cannot be null")
     private double msrp;
+    
+    @Column(name = "price")
+    @NotNull(message="Price cannot be null")
     private double price;
+    
+    @Column(name = "vin")
+    @NotBlank(message="VIN Cannot be null")
     private String vin;
+    
+    @Column(name = "interior")
+    @NotBlank(message="Interior cannot be null")
     private String interiorColor;
+    
+    @Column(name = "trans")
+    @NotBlank(message="Transmission cannot be null")
+    @Size(max = 10, message = "Transmission cannot be more than 10 characters long")
     private String transmission;
+    
+    @Column(name = "color")
+    @NotBlank(message="Color cannot be null")
     private String color;
+    
+    @Column(name = "bodystyle")
+    @NotBlank(message="Body style cannot be null")
     private String bodyStyle;
+    
+    @Column(name = "description")
+    @NotBlank(message="Description cannot be null")
     private String description;
+    
+    @Column(name = "featured")
+    @NotNull(message="Featured cannot be null")
     private boolean isFeatured;
     
 }

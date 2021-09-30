@@ -50,3 +50,5 @@ target/classes/templates/models.html
 target/surefire-reports/TEST-com.mthree.cardealership.dao.CarModelDaoDBTest.xml
 target/classes/static/limitedTimeOffer.png
 target/classes/templates/homeSpecials.html
+target/classes/templates/js/sales.js
+target/classes/templates/makePurchase.html
