@@ -10,13 +10,16 @@ import com.mthree.cardealership.dao.CarModelDao;
 import com.mthree.cardealership.dao.MakeDaoDB;
 import com.mthree.cardealership.entities.Car;
 import com.mthree.cardealership.entities.CarModel;
+import com.mthree.cardealership.entities.Role;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,7 +58,14 @@ public class CarController {
         return "addcar";
     }
     @PostMapping("admin/addcar")
-    public String addCar(Car c, HttpServletRequest req) {
+    public String addCar(@Valid Car c, BindingResult result, HttpServletRequest req, Model model) {
+        
+        if (result.hasErrors()) {
+            model.addAttribute("flag", "Error");
+            model.addAttribute("car", c);
+            return "addCar";
+        }
+        
         System.out.println(c);
         String year = req.getParameter("year");
         String modelID = req.getParameter("modelId");
@@ -63,9 +73,9 @@ public class CarController {
         String msrp = req.getParameter("msrp");
         String price = req.getParameter("price");
         String vin = req.getParameter("vin");
-        String interior = req.getParameter("interior");
+        String interior = req.getParameter("interiorColor");
         c.setInteriorColor(interior);
-        c.setTransmission(req.getParameter("trans"));
+        c.setTransmission(req.getParameter("transmission"));
         c.setColor(req.getParameter("color"));
         c.setBodyStyle(req.getParameter("bodyStyle"));
         c.setDescription(req.getParameter("description"));
@@ -78,6 +88,7 @@ public class CarController {
         c.setYear(Integer.parseInt(year));
         Car created = dao.addCar(c);
         
+        model.addAttribute("success", "Car added successfully!");        
         return "addcar";
     }
 
