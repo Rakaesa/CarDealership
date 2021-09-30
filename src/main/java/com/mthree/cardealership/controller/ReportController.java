@@ -1,8 +1,10 @@
 package com.mthree.cardealership.controller;
 
+import com.mthree.cardealership.dao.InventoryReportDao;
 import com.mthree.cardealership.dao.SalesReportDao;
 import com.mthree.cardealership.dao.TransactionDao;
 import com.mthree.cardealership.dao.UserDao;
+import com.mthree.cardealership.entities.InventoryReport;
 import com.mthree.cardealership.entities.SalesReport;
 import com.mthree.cardealership.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class ReportController {
     @Autowired
     SalesReportDao salesReportDao;
 
+    @Autowired
+    InventoryReportDao inventoryReportDao;
+
     @GetMapping("admin/reports/index")
     public String displayReports() {
         return "reports";
@@ -42,6 +47,10 @@ public class ReportController {
 
     @GetMapping("admin/reports/inventory")
     public String displayInventoryReport(Model model) {
+        List<InventoryReport> newInventoryReports = inventoryReportDao.getNewInventoryReports();
+        List<InventoryReport> usedInventoryReports = inventoryReportDao.getUsedInventoryReports();
+        model.addAttribute("newinventories", newInventoryReports);
+        model.addAttribute("usedinventories", usedInventoryReports);
         return "inventoryReport";
     }
 
