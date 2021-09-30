@@ -13,6 +13,8 @@
     <body>
         <!-- Main Body of Page -->
         <div class="container">
+            <head th:replace="common-header :: common-header" />
+
             <div class="row m-4">
                 <div class="col text-center border border-dark">
                     <h1><a href="/" class="text-dark">Car Manager</a></h1>
@@ -85,8 +87,10 @@
                         </div>
 
                         <div class="col-6">
-                            <label for="email" class="form-label">Featured</label>
-                            <input class="form-control" id="featured" name="featured">
+                <input type="radio" id="true" name="isFeatured" value="true">
+                <label for="html">true</label><br>
+                <input type="radio" id="false" name="isFeatured" value="false">
+                <label for="false">false</label><br>
                         </div>
 
                         <div class="col-12 mt-4">

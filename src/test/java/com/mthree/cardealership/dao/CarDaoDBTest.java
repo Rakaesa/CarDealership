@@ -68,7 +68,11 @@ public class CarDaoDBTest {
     @Test
     public void testDeleteCarById() {
         List<Car> all = dao.getAllCars();
-//        all.stream().max(x -> x.)
+        int initSize = all.size();
+        Car toBeDeleted = all.get(all.size() - 1);
+        dao.deleteCarById(toBeDeleted.getId());
+        int afterSize = dao.getAllCars().size();
+        assertTrue(initSize == afterSize + 1);
     }
 
     /**
