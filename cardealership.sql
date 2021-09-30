@@ -13,7 +13,7 @@ CREATE TABLE users(
 
 CREATE TABLE make(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    make VARCHAR(15) NOT NULL,
+    make VARCHAR(40) NOT NULL,
     userid int,
     dateAdded date NOT NULL,
     foreign key (userid) references users(id)
@@ -21,7 +21,7 @@ CREATE TABLE make(
 
 CREATE TABLE model(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    model VARCHAR(15) NOT NULL,
+    model VARCHAR(40) NOT NULL,
     makeid int,
     userid int,
     dateAdded date NOT NULL,
@@ -49,8 +49,8 @@ CREATE TABLE car(
 
 CREATE TABLE specials(
     id INT primary key auto_increment,
-    title varchar(15) NOT NULL,
-    description varchar(255) not null
+    title varchar(100) NOT NULL,
+    description varchar(1000) not null
 );
 
 CREATE TABLE contact(
@@ -79,6 +79,7 @@ CREATE TABLE transactions(
     id INT primary key auto_increment,
     userid int,
     carid int,
+    purchasedate date null,
     purchaseprice double NOT NULL,
     purchasetype varchar(10) NOT NULL,
     name varchar(50) NOT NULL,
@@ -92,3 +93,9 @@ CREATE TABLE transactions(
 	FOREIGN KEY (userid) REFERENCES users(id),
     FOREIGN KEY (carid) REFERENCES car(id)
 );
+CREATE TABLE salesreport(
+    id INT primary key auto_increment,
+    name varchar(50) not null,
+    totalsales double not null,
+    totalvehicles int not null
+)
