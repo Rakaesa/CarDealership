@@ -21,11 +21,11 @@
 
     <div class="row m-4 border border-dark">
         <div class="col-7 m-3">
-            <form class="row g-3" role="form" id="salesForm">
+            <form class="row g-3" action="/admin/reports/sales" method="POST" role="form" id="salesForm">
                 <div class="col-4">
                     <label for="user" class="form-label">User</label>
                     <select id="user" name="user" class="form-control">
-                        <option>All</option>
+                        <option name="all">All</option>
                         <option th:each="user: ${users}" th:value="${user.id}" th:text="${user.firstName + ' ' + user.lastName}"></option>
                     </select>
                 </div>
@@ -41,13 +41,11 @@
                 </div>
 
                 <div class="col-4 mt-4">
-                    <button type="button" id="searchButton" class="btn btn-primary">Search</button>
+                    <button type="submit" id="searchButton" class="btn btn-primary">Search</button>
                 </div>
             </form>
         </div>
     </div>
-
-
 
     <div class="row m-4">
         <div class="col">
@@ -64,7 +62,13 @@
                     <th>Total Vehicles</th>
                 </tr>
                 </thead>
-                <tbody id="contentRowsMain"></tbody>
+                <tbody>
+                <tr th:each="sale: ${sales}">
+                    <td th:text="${sale.name}">User</td>
+                    <td th:text="${sale.totalSales}">Total Sales</td>
+                    <td th:text="${sale.totalVehicles}">Total Vechicles</td>
+                </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -76,6 +80,5 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="js/sales.js"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@ public class SalesReport {
     private String name;
     private double totalSales;
     private double totalVehicles;
+    private Date purchaseDate;
 
     public int getId() {
         return id;
@@ -38,5 +39,13 @@ public class SalesReport {
 
     public void setTotalVehicles(double totalVehicles) {
         this.totalVehicles = totalVehicles;
+    }
+
+    public Date getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 }

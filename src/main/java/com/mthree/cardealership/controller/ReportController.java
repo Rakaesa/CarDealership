@@ -39,7 +39,7 @@ public class ReportController {
         return "reports";
     }
 
-    @GetMapping("admin/reports/sales")
+    @GetMapping("admin/reports/sale")
     public String displaySalesReport(Model model) {
         List<User> users = userDao.getAllUsers();
         model.addAttribute("users", users);
@@ -52,13 +52,24 @@ public class ReportController {
     }
 
     @PostMapping("admin/reports/sales")
-    public List<SalesReport> displaySalesReport(@Valid User user, BindingResult result, HttpServletRequest request, Model model) {
-
+    public String displaySalesReport(@Valid User user, BindingResult result, HttpServletRequest request, Model model) {
+        List<SalesReport> salesReports;
         Date fromDate = Date.valueOf(request.getParameter("fromDate"));
         Date toDate= Date.valueOf(request.getParameter("toDate"));
-        String userId = request.getParameter("userid");
-        User selectedUser = userDao.getUserById(Integer.parseInt(userId));
 
-        return salesReportDao.getSalesReports(selectedUser, fromDate, toDate);
+        String allUsers = request.getParameter("all");
+
+        if(allUsers.equals("all")){
+            salesReports = salesReportDao.getAllSalesReports(fromDate, toDate);
+        }else{
+            String userId = request.getParameter("userid");
+            User selectedUser = userDao.getUserById(Integer.parseInt(userId));
+            salesReports = salesReportDao.getSalesReportsForUser(selectedUser, fromDate, toDate);
+        }
+
+        model.addAttribute("sales", salesReports);
+        List<User> users = userDao.getAllUsers();
+        model.addAttribute("users", users);
+        return "salesReport";
     }
 }
