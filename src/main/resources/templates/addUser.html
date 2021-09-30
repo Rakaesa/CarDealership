@@ -25,10 +25,14 @@
             </div>
 
             <div th:if="${flag}!=null">
-                            <p th:each="error : ${#fields.errors('user.username')}" class="alert alert-danger"
-                               th:text="${error}"> Username Taken </p>
-                            <p th:each="error: ${#fields.errors('user.roles')}" class="alert alert-danger" th:text="${error}">No role selected</p>
-                        </div>
+                <p th:each="error : ${#fields.errors('user.username')}" class="alert alert-danger"
+                   th:text="${error}"> Username Taken </p>
+                <p th:each="error: ${#fields.errors('user.roles')}" class="alert alert-danger" th:text="${error}">No role selected</p>
+            </div>
+            <div th:if="${passErr}!= null">
+                <p th:text="${passErr}" class="alert alert-danger">Password Error</p>
+            </div>
+
 
 
             <div class="row m-4 border border-dark">

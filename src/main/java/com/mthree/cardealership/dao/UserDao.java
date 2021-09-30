@@ -19,6 +19,7 @@ public interface UserDao {
     User addUser(User user);
     List<User> getAllUsers();
     User editUser(User user);
+    User getUserByUsername(String us);
     
     void deleteUserById(int id);
     
