@@ -160,7 +160,8 @@ public class CarController {
         for (Car car : cars) {
             CarModel model = carModelDao.getCarModelById(car.getModelID());
             String comp = model.getModel() + makeDao.getMakeById(model.getMakeID()).getMake() + car.getYear(); 
-            if(comp.contains(request.getParameter("searchTerm"))){
+            comp = comp.toLowerCase();
+            if(comp.contains(request.getParameter("searchTerm").toLowerCase())){
                 results.add(car);
             }
         }
@@ -208,6 +209,24 @@ public class CarController {
     public String showAdminPage(Model m, HttpServletRequest request){
         List<Car> cars = dao.getAllCars();
         m.addAttribute("cars", cars);
+        m.addAttribute("header", "Admin");
+        m.addAttribute("subheader", "Edit or Delete a car");
+        return "carAdmin";
+    }
+    
+    @PostMapping("admin/car/search")
+    public String handleAdminSearch(Model m, HttpServletRequest request){
+        List<Car> cars = dao.getAllCars();
+        List<Car> results = new ArrayList<Car>();
+        for (Car car : cars) {
+            CarModel model = carModelDao.getCarModelById(car.getModelID());
+            String comp = model.getModel() + makeDao.getMakeById(model.getMakeID()).getMake() + car.getYear(); 
+            comp = comp.toLowerCase();
+            if(comp.contains(request.getParameter("searchTerm").toLowerCase())){
+                results.add(car);
+            }
+        }
+        m.addAttribute("cars", results);
         m.addAttribute("header", "Admin");
         m.addAttribute("subheader", "Edit or Delete a car");
         return "carAdmin";

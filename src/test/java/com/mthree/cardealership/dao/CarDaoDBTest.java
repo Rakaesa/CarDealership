@@ -6,8 +6,10 @@
 package com.mthree.cardealership.dao;
 
 import com.mthree.cardealership.entities.Car;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -80,6 +82,25 @@ public class CarDaoDBTest {
      */
     @Test
     public void testUpdateCarByID() {
+        List<Car> all = dao.getAllCars();
+        int initSize = all.size();
+        Car toBeUpdated = all.get(all.size() - 1);
+        //String modelID, String year, String type, String mrsp, String price,
+        //String vin, String interior,String trans, String color, 
+        //String bodyStyle,String description, String 
+        String initialVin = toBeUpdated.getVin();
+        String vinToGive = generateRandomString().substring(0, 17);
+        
+        dao.updateCarByID(toBeUpdated.getId(),String.valueOf(toBeUpdated.getModelID()), String.valueOf(toBeUpdated.getYear()), toBeUpdated.getType(), String.valueOf(toBeUpdated.getMsrp()),
+                String.valueOf(toBeUpdated.getPrice()), vinToGive, toBeUpdated.getInteriorColor(), toBeUpdated.getTransmission(), toBeUpdated.getColor() , toBeUpdated.getBodyStyle(), toBeUpdated.getDescription(), String.valueOf(toBeUpdated.isIsFeatured()));
+        Car carById = dao.getCarById(toBeUpdated.getId());
+        assertEquals(carById.getVin(), vinToGive);
     }
     
+    public String generateRandomString(){
+        byte[] array = new byte[100]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+        return generatedString;
+    }
 }
