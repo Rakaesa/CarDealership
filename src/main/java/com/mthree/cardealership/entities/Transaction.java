@@ -5,6 +5,7 @@
  */
 package com.mthree.cardealership.entities;
 
+import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -50,6 +51,10 @@ public class Transaction {
     @NotBlank(message = "Zipcode must not be blank")
     @Size(max = 10, message="Zipcode cannot be more than 10 characters")
     private String zipcode;
+    
+    private LocalDate purchaseDate;
+    private int userId;
+    private int carId;
 
     public int getId() {
         return id;
@@ -154,4 +159,30 @@ public class Transaction {
     public void setCar(Car car) {
         this.car = car;
     }    
+
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(LocalDate purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getCarId() {
+        return carId;
+    }
+
+    public void setCarId(int carId) {
+        this.carId = carId;
+    }
+    
+    
 }

@@ -78,9 +78,9 @@ public class MakePurchaseController {
         String zipcode = request.getParameter("zipcode");
         
         Transaction newTransaction = new Transaction();
-        //newTransaction.setUserId(getUserid());
-        //newTransaction.setCarId(carId);
-        //newTransaction.setPurchaseDate(LocalDate.now());
+        newTransaction.setUserId(getUserid());
+        newTransaction.setCarId(carId);
+        newTransaction.setPurchaseDate(LocalDate.now());
         newTransaction.setPurchasePrice(purchasePrice);
         newTransaction.setPurchaseType(purchaseType);
         newTransaction.setName(name);
