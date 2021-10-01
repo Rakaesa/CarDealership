@@ -18,16 +18,13 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author conno
- */
 @Repository
-public class UserDaoDB implements UserDao{
-    
+public class UserDaoDB implements UserDao {
+
     @Autowired
     JdbcTemplate jdbc;
 
@@ -41,10 +38,10 @@ public class UserDaoDB implements UserDao{
             return null;
         }
     }
-    
+
     @Override
     public List<User> getAllUsers() {
-        final String SELECT_ALL_USER = "SELECT * FROM users JOIN user_roles ur ON ur.userId = users.Id ORDER BY id;";
+        final String SELECT_ALL_USER = "SELECT * FROM users JOIN user_roles ur ON ur.userId = users.Id JOIN roles r ON r.id = ur.roleid ORDER BY users.id, roleid;";
         List<User> users = jdbc.query(SELECT_ALL_USER, new UserMapper());
         List<User> usersTemp = new ArrayList<User>();
         User prevUser = new User();
@@ -53,17 +50,18 @@ public class UserDaoDB implements UserDao{
         Set<Role> tempRoles = new HashSet<Role>();
         long tempId;
         int index = 0;
-        for(User u: users){
-            
-            if(index == 0)
-            prevUser = u;
-            
-            if(index != 0 && users.iterator().hasNext() && user != null && prevUser.getId() == u.getId()){
+        for (User u : users) {
+
+            if (index == 0) {
+                prevUser = u;
+            }
+
+            if (index != 0 && users.iterator().hasNext() && user != null && prevUser.getId() == u.getId()) {
                 roles = new HashSet<Role>(prevUser.getRoles());
                 roles.add(u.getRoles().iterator().next());
                 user = u;
                 user.setRoles(roles);
-                usersTemp.set(index-1, user);
+                usersTemp.set(index - 1, user);
                 prevUser = u;
                 continue;
             }
@@ -73,33 +71,32 @@ public class UserDaoDB implements UserDao{
         }
         return usersTemp;
     }
-    
+
     @Override
     public User getUserById(int id) {
         try {
-            final String SELECT_USER_BY_ID = "SELECT * FROM users JOIN user_roles ur ON ur.userId = users.Id WHERE id = ?";
+            final String SELECT_USER_BY_ID = "SELECT * FROM users JOIN user_roles ur ON ur.userId = users.Id JOIN roles r ON r.id = ur.roleid WHERE users.id = ? ORDER BY users.id, roleid;";
             List<User> users = jdbc.query(SELECT_USER_BY_ID, new UserMapper(), id);
             Set<Role> roles = new HashSet<Role>();
             User user = new User();
-            if(users.size()>1){
-                for(User u : users){
-                    roles.add(u.getRoles().iterator().next());                    
+            if (users.size() > 1) {
+                for (User u : users) {
+                    roles.add(u.getRoles().iterator().next());
                 }
             }
             user = users.get(0);
-            if(roles.size()>0)
+            if (roles.size() > 0) {
                 user.setRoles(roles);
+            }
             return user;
         } catch (DataAccessException ex) {
             return null;
         }
     }
-    
+
     @Override
     @Transactional
     public User addUser(User user) {
-        
-
 
         final String INSERT_USER = "INSERT INTO users(username, password, email, firstname, lastname) "
                 + "VALUES(?,?,?,?,?)";
@@ -113,20 +110,21 @@ public class UserDaoDB implements UserDao{
 
         long newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         Set<Role> roles = user.getRoles();
-        for(Role r: roles)
-        jdbc.update(INSERT_USER_ROLE, newId, r.getId());
+        for (Role r : roles) {
+            jdbc.update(INSERT_USER_ROLE, newId, r.getId());
+        }
         user.setId(newId);
         return user;
     }
-    
+
     @Override
     @Transactional
-    public User editUser(User user){
-        
+    public User editUser(User user) {
+
         final String EDIT_USER = "UPDATE users SET username = ?, password = ?, email = ?, firstname = ?, lastname = ? WHERE id = ?;";
         final String WIPE_USER_ROLES = "DELETE FROM user_roles WHERE userid = ?";
         final String INSERT_USER_ROLE = "INSERT INTO user_roles(userid, roleid) VALUES(?,?)";
-        
+
         jdbc.update(EDIT_USER,
                 user.getUsername(),
                 user.getPassword(),
@@ -136,11 +134,12 @@ public class UserDaoDB implements UserDao{
                 user.getId());
         Set<Role> roles = user.getRoles();
         jdbc.update(WIPE_USER_ROLES, user.getId());
-        for(Role r: roles)
-        jdbc.update(INSERT_USER_ROLE, user.getId(), r.getId());
-        return user;       
+        for (Role r : roles) {
+            jdbc.update(INSERT_USER_ROLE, user.getId(), r.getId());
+        }
+        return user;
     }
-    
+
     @Override
     @Transactional
     public void deleteUserById(int id) {
@@ -148,25 +147,23 @@ public class UserDaoDB implements UserDao{
         jdbc.update(DELETE_USER_STUDENT, id);
 
     }
-    
+
     public static final class UserMapper implements RowMapper<User> {
+
+        @Autowired
+        JdbcTemplate jdbc;
 
         @Override
         public User mapRow(ResultSet rs, int index) throws SQLException {
+
+            Role role = new Role();
+            role.setId(rs.getInt("roleid"));
+            role.setRole(rs.getString("role"));
             
             Set<Role> roles = new HashSet<Role>();
-            Role role = new Role();
-            if(rs.getInt("roleid") == 2){
-                role.setId(1);
-                role.setRole("Admin");
-            }
-            else if(rs.getInt("roleid") == 1){
-                role.setId(2);
-                role.setRole("Sales");
-            }
             roles.add(role);
             User user = new User();
-            user.setId(rs.getLong("id"));  
+            user.setId(rs.getLong("id"));
             user.setRoles(roles);
             user.setUsername(rs.getString("username"));
             user.setEmail(rs.getString("email"));
@@ -175,7 +172,7 @@ public class UserDaoDB implements UserDao{
             return user;
         }
     }
-    
+
     @Override
     public User getUserByUsername(String us) {
         try {
@@ -183,18 +180,19 @@ public class UserDaoDB implements UserDao{
             List<User> users = jdbc.query(SELECT_USER_BY_ID, new UserMapper(), us);
             Set<Role> roles = new HashSet<Role>();
             User user = new User();
-            if(users.size()>1){
-                for(User u : users){
-                    roles.add(u.getRoles().iterator().next());                    
+            if (users.size() > 1) {
+                for (User u : users) {
+                    roles.add(u.getRoles().iterator().next());
                 }
             }
             user = users.get(0);
-            if(roles.size()>0)
+            if (roles.size() > 0) {
                 user.setRoles(roles);
+            }
             return user;
         } catch (DataAccessException ex) {
             return null;
         }
     }
-    
+
 }

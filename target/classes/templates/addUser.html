@@ -30,6 +30,9 @@
                 <p th:each="error : ${#fields.errors('user.username')}" class="alert alert-danger"
                    th:text="${error}"> Username Taken </p>
                 <p th:each="error: ${#fields.errors('user.roles')}" class="alert alert-danger" th:text="${error}">No role selected</p>
+                <p th:each="error: ${#fields.errors('user.password')}" class="alert alert-danger" th:text="${error}">No role selected</p>
+                <p th:each="error: ${#fields.errors('user.firstname')}" class="alert alert-danger" th:text="${error}">No role selected</p>
+                <p th:each="error: ${#fields.errors('user.lastname')}" class="alert alert-danger" th:text="${error}">No role selected</p>
             </div>
             <div th:if="${passErr}!= null">
                 <p th:text="${passErr}" class="alert alert-danger">Password Error</p>
@@ -76,7 +79,7 @@
 
                         <div class="col-md-6">
                             <label for="confirm_password" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                         </div>
 
                         <div class="col-12 mt-4">

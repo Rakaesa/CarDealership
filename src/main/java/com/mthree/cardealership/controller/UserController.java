@@ -40,7 +40,6 @@ public class UserController {
     @GetMapping("admin/users")
     public String displayUsers(Model model) {
         List<User> users = userDao.getAllUsers();
-        System.out.println(users.size());
         model.addAttribute("users", users);
         return "users";
     }
@@ -90,7 +89,7 @@ public class UserController {
             user.setPassword(password);
         } else {
             model.addAttribute("passErr", "Your passwords do not match!");
-            return "edit";
+            return "edituser";
         }
 
         if (result.hasErrors()) {
@@ -145,6 +144,9 @@ public class UserController {
         user.setLastName(lastName);
         user.setFirstName(firstName);
         user.setEmail(email);
+        
+        String pass1 = request.getParameter("password");
+        String pass2 = request.getParameter("confirmPassword");
 
         if (request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
             String password = passwordEncoder.encode(request.getParameter("password"));
@@ -191,11 +193,6 @@ public class UserController {
     @PostMapping("account/changepassword")
     public String changePassword(Model model, HttpServletRequest request, @CurrentSecurityContext(expression = "authentication?.name") String username) {
 
-//        if (result.hasErrors()) {
-//            List<Role> roles = roleDao.getAllRoles();
-//            model.addAttribute("flag", "Error");
-//            return "changepassword";
-//        }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         if (request.getParameter("password").equals(request.getParameter("confirmPassword"))) {

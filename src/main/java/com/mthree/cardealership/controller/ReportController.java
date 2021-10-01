@@ -34,7 +34,12 @@ public class ReportController {
 
     @Autowired
     InventoryReportDao inventoryReportDao;
-
+    
+    @GetMapping("admin/reports")
+    public String displayReportsBase(){
+        return "redirect:/admin/reports/index";
+    }
+    
     @GetMapping("admin/reports/index")
     public String displayReports() {
         return "reports";
