@@ -9,8 +9,8 @@
         <link href="../../jumbotron.css" rel="stylesheet">
         <title>Add Make</title>
     </head>
+    <head th:replace="common-header :: common-header" />
     <body>
-        <head th:replace="common-header :: common-header" />
         <div class="container">
             <div class="row m-4">
                 <h1>Makes</h1>
@@ -35,9 +35,9 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Make</th>
-                                <th>Date Added</th>
-                                <th>User</th>
+                                <th class="text-center">Make</th>
+                                <th class="text-center">Date Added</th>
+                                <th class="text-center">User</th>
                             </tr>
                         </thead>
                         <tbody>
