@@ -10,7 +10,7 @@
         <title>Add Purchase</title>
     </head>
     <body>
-    <head th:replace="common-header :: common-header" />
+    <head th:replace="common-header :: common-header"></head>
     <div class="container">
         <div class="row m-4">
             <h1>Purchase Vehicle</h1>
@@ -33,56 +33,69 @@
                 </div>
                 <div class="col-9">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-4">
                             <label for="carBodyStyle">Body Style: </label>
                             <label th:text="${car.bodyStyle}">
                                 car body style</label>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label for="interior">Interior: </label>
                             <label th:text="${car.interiorColor}">
                                 car interior color</label>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label for="carSalePrice">Sale Price: </label>
                             <label th:text="${car.price}">
                                 car sale price</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-4">
                             <label for="carTrans">Trans: </label>
                             <label th:text="${car.transmission}">
                                 car transmission</label>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label for="mileage">Mileage: </label>
                             <label th:text="${car.type}">
                                 car mileage</label>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label for="carMSRP">MSRP: </label>
                             <label th:text="${car.msrp}">
                                 car MSRP</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-4">
                             <label for="color">Color: </label>
                             <label th:text="${car.color}">
                                 car color</label>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label for="VIN">VIN #: </label>
                             <label th:text="${car.vin}">
                                 car VIN#</label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-2">
+                           <label for="description">Description: </label> 
+                        </div>
+                        <div class="col-10">
+                           <label th:text="${car.description}">Car Description</label> 
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
+        
+        <div class="row m-4">
+            <a class="btn btn-primary" href="/sales/car">Back to list</a>
+        </div>
 
-        <div class="col-md-8 order-md-1 pb-5">
+        <div class="col-9 order-md-1 pb-5">
             <h4 class="mb-3">Sales Information</h4>
             <form th:if="${car.isPurchased == false}" class="needs-validation" novalidate action="addTransaction" method="POST">
                 <div class="row">
@@ -225,10 +238,13 @@
                     </div>
                 </div>
                 <button class="btn btn-primary" type="submit">Save</button>
-            </form>
+            </form>   
         </div>
-        <div th:if="${car.isPurchased}" class="alert alert-success" role="alert">
-            <h4> This vehicle was sold. </h4>
+        
+        <div class="row ml-2">
+            <div th:if="${car.isPurchased}" class="alert alert-success text-left col-10" role="alert">
+                <h4>This vehicle was sold. </h4>
+            </div>
         </div>
     </div>
 

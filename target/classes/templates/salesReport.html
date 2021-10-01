@@ -65,11 +65,16 @@
                             <tr th:each="sale: ${sales}">
                                 <td th:text="${sale.user}">User</td>
                                 <td th:text="${sale.totalSales}">Total Sales</td>
-                                <td th:text="${sale.totalVehicles}">Total Vechicles</td>
+                                <td th:text="${sale.totalVehicles}">Total Vehicles</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="col-12 mt-4">
+                <button class="btn btn-primary" onclick="window.location.href='/admin/reports/index';">
+                    Back
+                </button>
             </div>
         </div>
         
