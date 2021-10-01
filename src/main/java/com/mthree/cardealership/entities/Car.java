@@ -36,6 +36,7 @@ public class Car {
         this.bodyStyle = bodyStyle;
         this.description = description;
         this.isFeatured = isFeatured;
+        this.isPurchased = false;
     }
     
     
@@ -267,5 +268,17 @@ public class Car {
     @Column(name = "featured")
     @NotNull(message="Featured cannot be null")
     private boolean isFeatured;
+       
+    @Column(name = "featured")
+    private boolean isPurchased;
+
+    public boolean isIsPurchased() {
+        return isPurchased;
+    }
+
+    public void setIsPurchased(boolean isPurchased) {
+        this.isPurchased = isPurchased;
+    }
+    
     
 }
