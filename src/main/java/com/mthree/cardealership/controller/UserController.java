@@ -88,6 +88,8 @@ public class UserController {
             String password = passwordEncoder.encode(request.getParameter("password"));
             user.setPassword(password);
         } else {
+            List<Role> roles = roleDao.getAllRoles();
+            model.addAttribute("roles", roles);
             model.addAttribute("passErr", "Your passwords do not match!");
             return "edituser";
         }
