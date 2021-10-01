@@ -15,15 +15,13 @@
             <div class="row m-4">
                 <div class="col text-center border border-dark">
                     <h1><a href="/" class="text-dark">Car Manager</a></h1>
-                </div>
-                
+                </div>                
             </div>
             <div class="row m-4 border border-dark">
                 <div class="col m-3">
                     <h2 th:text='${car.vin}'></h2>
                 </div>
             </div>
-
             <div class="row m-4 border border-dark">
                 <div class="col-7 m-3">
                     <div class="card" style="width: "80%";">
@@ -33,9 +31,7 @@
                             <p class="card-text" th:text="${car.description}"></p>
                         </div>
                         <ul class="list-group list-group-flush">
-
                             <li class="list-group-item" th:text="'Type  : ' + ${car.type}"></li>
-
                             <li class="list-group-item" th:text="'Transmission : '+ ${car.transmission}"></li>
                             <li class="list-group-item" th:text=" 'Body Style : ' + ${car.bodyStyle}">Vestibulum at eros</li>
                         </ul>
