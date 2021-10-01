@@ -19,10 +19,9 @@ public class InventoryReportDaoDB implements InventoryReportDao {
     public List<InventoryReport> getNewInventoryReports() {
         List<InventoryReport> inventoryReports;
         final String SELECT_NEWINVENTORYREPORTS;
-        SELECT_NEWINVENTORYREPORTS = "SELECT c.year,ma.make,mo.model,count(c.id),sum(c.mrsp) as StockValue"
-                + " FROM car c JOIN model mo on c.modelid=mo.id "
-                + "JOIN make ma on mo.makeid=ma.id WHERE c.type='new' "
-                + "GROUP BY c.year, ma.make, mo.model;";
+        SELECT_NEWINVENTORYREPORTS = "SELECT c.year,ma.make,mo.model,count(c.id) as count,sum(c.mrsp) as StockValue " +
+                "FROM car c join model mo on c.modelid=mo.id join make ma on mo.makeid=ma.id " +
+                "WHERE c.type='new' and c.purchased=false group by c.year, ma.make, mo.model";
         inventoryReports = jdbc.query(SELECT_NEWINVENTORYREPORTS,
                 new InventoryReportMapper());
         return inventoryReports;
@@ -33,10 +32,9 @@ public class InventoryReportDaoDB implements InventoryReportDao {
         List<InventoryReport> inventoryReports;
         final String SELECT_USEDINVENTORYREPORTS;
 
-        SELECT_USEDINVENTORYREPORTS = "SELECT c.year,ma.make,mo.model,count(c.id),sum(c.mrsp) as StockValue"
-                + " FROM car c JOIN model mo on c.modelid=mo.id "
-                + "JOIN make ma on mo.makeid=ma.id WHERE c.type='used' "
-                + "GROUP BY c.year, ma.make, mo.model;";
+        SELECT_USEDINVENTORYREPORTS = "SELECT c.year,ma.make,mo.model,count(c.id) as count,sum(c.mrsp) as StockValue \n" +
+                "FROM car c join model mo on c.modelid=mo.id join make ma on mo.makeid=ma.id \n" +
+                "WHERE c.type='used' and c.purchased=false group by c.year, ma.make, mo.model";
         inventoryReports = jdbc.query(SELECT_USEDINVENTORYREPORTS,
                 new InventoryReportMapper());
         return inventoryReports;
@@ -47,7 +45,6 @@ public class InventoryReportDaoDB implements InventoryReportDao {
         @Override
         public InventoryReport mapRow(ResultSet rs, int index) throws SQLException {
             InventoryReport inventoryReport = new InventoryReport();
-            inventoryReport.setId(rs.getInt("id"));
             inventoryReport.setYear(rs.getInt("year"));
             inventoryReport.setMake(rs.getString("make"));
             inventoryReport.setModel(rs.getString("model"));

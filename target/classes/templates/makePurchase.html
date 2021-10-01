@@ -26,23 +26,81 @@ and open the template in the editor.
             </div>
         
         <div class="row m-4 border border-dark">
-                <div class="col-7 text-center m-3">
-                    <form action="makes" method="POST">
-                        <div class="form-group row">
-
-                            <label for="makeName" class="col-3 col-form-label font-weight-bold">
-                                Placeholder for vehicle detail</label>
-                            <input type="text" name="makeName" required
-                                       id="makeName" class="form-control col-6"/>
-                        
-                        </div>
-                    </form>
-                </div>
+            <div class= "row col-5"> 
+                <input th:value="${car.id}" type="hidden" name="carId"/>
+                <label for="carYear" th:text="${car.year}" class="font-weight-bold ml-2 mr-2">
+                    Placeholder for vehicle detail</label>
+                <span>  </span>
+                <label for="carMake" th:text="${makeName}" class="font-weight-bold mr-2">
+                    Placeholder for vehicle detail</label>
+                <span>  </span>
+                <label for="carModel" th:text="${modelName}" class="font-weight-bold">
+                    Placeholder for vehicle detail</label>
             </div>
+                    
+            <div class= "row">
+                <div class="col-3">
+                    <img src="/2022-mitsubishi-outlander-24.jpg" class="img-fluid">
+                </div>
+
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="carBodyStyle">Body Style: </label>
+                            <label th:text="${car.bodyStyle}">
+                                car body style</label>
+                        </div>
+                        <div class="col-3">
+                            <label for="interior">Interior: </label>
+                            <label th:text="${car.interiorColor}">
+                                car interior color</label>
+                        </div>
+                        <div class="col-3">
+                            <label for="carSalePrice">Sale Price: </label>
+                            <label th:text="${car.price}">
+                                car sale price</label>
+                            </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-3">
+                            <label for="carTrans">Trans: </label>
+                            <label th:text="${car.transmission}">
+                                car transmission</label>
+                        </div>
+                        <div class="col-3">
+                            <label for="mileage">Mileage: </label>
+                            <label th:text="${car.type}">
+                                car mileage</label>
+                        </div>
+                        <div class="col-3">
+                            <label for="carMSRP">MSRP: </label>
+                            <label th:text="${car.msrp}">
+                                car MSRP</label>
+                            </div>
+           
+                        </div>
+                    <div class="row">
+                            <div class="col-3">
+                            <label for="color">Color: </label>
+                            <label th:text="${car.color}">
+                                car color</label>
+                        </div>
+                        <div class="col-3">
+                            <label for="VIN">VIN #: </label>
+                            <label th:text="${car.vin}">
+                                car VIN#</label>
+                        </div>
+           
+                        </div>
+            </div>
+                    </div>
+                    
+                    
+        </div>
         
-            <div class="col-md-8 order-md-1">
+            <div class="col-md-8 order-md-1 pb-5">
               <h4 class="mb-3">Sales Information</h4>
-              <form class="needs-validation" novalidate>
+              <form th:if="${car.isPurchased == false}" class="needs-validation" novalidate action="addTransaction" method="POST">
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="clientName">Name</label>
@@ -158,6 +216,7 @@ and open the template in the editor.
                     <div class="invalid-feedback">
                       Zip code is required.
                     </div>
+                    <input th:value="${car.id}" type="hidden" name="carId"/>
                   </div>
                 </div>
                 <hr class="mb-4">
@@ -186,6 +245,10 @@ and open the template in the editor.
                 <button class="btn btn-primary" type="submit">Save</button>
               </form>
             </div>
+        
+        <div th:if="${car.isPurchased}" class="alert alert-success" role="alert">
+            <h4> This vehicle was sold. </h4>
+        </div>
 
         </div>
 

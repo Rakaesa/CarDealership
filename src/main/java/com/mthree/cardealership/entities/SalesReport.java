@@ -1,28 +1,16 @@
 package com.mthree.cardealership.entities;
 
-import java.sql.Date;
-
 public class SalesReport {
-    private int id;
-    private String name;
+    private String user;
     private double totalSales;
-    private double totalVehicles;
-    private Date purchaseDate;
+    private int totalVehicles;
 
-    public int getId() {
-        return id;
+    public String getUser() {
+        return user;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public double getTotalSales() {
@@ -33,19 +21,12 @@ public class SalesReport {
         this.totalSales = totalSales;
     }
 
-    public double getTotalVehicles() {
+    public int getTotalVehicles() {
         return totalVehicles;
     }
 
-    public void setTotalVehicles(double totalVehicles) {
+    public void setTotalVehicles(int totalVehicles) {
         this.totalVehicles = totalVehicles;
     }
 
-    public Date getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public void setPurchaseDate(Date purchaseDate) {
-        this.purchaseDate = purchaseDate;
-    }
 }

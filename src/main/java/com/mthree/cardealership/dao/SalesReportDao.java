@@ -5,8 +5,9 @@ import com.mthree.cardealership.entities.User;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface SalesReportDao {
-    List<SalesReport> getAllSalesReports(Date fromDate, Date toDate);
-    List<SalesReport> getSalesReportsForUser(User user, Date fromDate, Date toDate);
+    List<SalesReport> getAllSalesReports(Map<String, String> dateMap);
+    List<SalesReport> getSalesReportsForUser(User user, Map<String, String> dateMap);
 }
