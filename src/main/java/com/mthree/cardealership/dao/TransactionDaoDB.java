@@ -48,8 +48,8 @@ public class TransactionDaoDB implements TransactionDao {
     @Override
     public Transaction addTransaction(Transaction transaction) {
         final String INSERT_CONTACT = "INSERT INTO transactions(purchaseprice, purchasetype, name, email, phone, street1, " +
-                "street2, city, state, zipcode) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?)";
+                "street2, city, state, zipcode, userid, carid, purchasedate) "
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbc.update(INSERT_CONTACT,
                 transaction.getPurchasePrice(),
                 transaction.getPurchaseType(),
@@ -60,7 +60,10 @@ public class TransactionDaoDB implements TransactionDao {
                 transaction.getStreetAlt(),
                 transaction.getCity(),
                 transaction.getState(),
-                transaction.getZipcode());
+                transaction.getZipcode(),
+                transaction.getUserId(),
+                transaction.getCarId(),
+                transaction.getPurchaseDate());
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         transaction.setId(newId);
@@ -133,6 +136,10 @@ public class TransactionDaoDB implements TransactionDao {
             transaction.setCity(rs.getString("city"));
             transaction.setState(rs.getString("state"));
             transaction.setZipcode(rs.getString("zipcode"));
+            transaction.setCarId(rs.getInt("carid"));
+            transaction.setUserId(rs.getInt("userid"));
+            transaction.setPurchaseDate(rs.getDate("purchasedate").toLocalDate());
+            
             return transaction;
         }
     }
