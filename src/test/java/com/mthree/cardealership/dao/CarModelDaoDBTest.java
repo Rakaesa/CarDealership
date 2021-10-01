@@ -50,20 +50,20 @@ public class CarModelDaoDBTest {
     @BeforeEach
     public void setUp() {
         
-        List<CarModel> carModels = carModelDao.getAllCarModels();
-        for(CarModel carModel : carModels) {
-            carModelDao.deleteCarModelById(carModel.getId());
-        }
-        
-        List<Make> makes = makeDao.getAllMakes();
-        for(Make make : makes) {
-            makeDao.deleteMakeById(make.getId());
-        }
-        
-        List<User> users = userDao.getAllUsers();
-        for(User user : users) {
-            userDao.deleteUserById(Math.toIntExact(user.getId()));
-        }
+//        List<CarModel> carModels = carModelDao.getAllCarModels();
+//        for(CarModel carModel : carModels) {
+//            carModelDao.deleteCarModelById(carModel.getId());
+//        }
+//        
+//        List<Make> makes = makeDao.getAllMakes();
+//        for(Make make : makes) {
+//            makeDao.deleteMakeById(make.getId());
+//        }
+//        
+//        List<User> users = userDao.getAllUsers();
+//        for(User user : users) {
+//            userDao.deleteUserById(Math.toIntExact(user.getId()));
+//        }
         
     }
     
