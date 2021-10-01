@@ -36,7 +36,11 @@ public class UserController {
 
     @Autowired
     RoleDao roleDao;
-
+    
+    @GetMapping("/admin")
+    public String admin(){
+        return "redirect:/admin/users";
+    }
     @GetMapping("admin/users")
     public String displayUsers(Model model) {
         List<User> users = userDao.getAllUsers();
