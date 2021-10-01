@@ -9,10 +9,16 @@ import com.mthree.cardealership.dao.CarDao;
 import com.mthree.cardealership.dao.TransactionDao;
 import com.mthree.cardealership.entities.Car;
 import com.mthree.cardealership.entities.CarModel;
+import com.mthree.cardealership.entities.Transaction;
+import com.mthree.cardealership.entities.User;
 import com.mthree.cardealership.service.CarModelService;
+import com.mthree.cardealership.service.DealershipUserDetails;
 import com.mthree.cardealership.service.MakeService;
+import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,9 +66,47 @@ public class MakePurchaseController {
         int carId = Integer.parseInt(request.getParameter("carId"));
         Car curCar = carDao.getCarById(carId);
         
-        //carDao.markCarPurchased(curCar);
+        int purchasePrice = Integer.parseInt(request.getParameter("purchasePrice"));
+        String purchaseType = request.getParameter("purchaseType");
+        String name = request.getParameter("clientName");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("clientPhone");
+        String street1 = request.getParameter("street1");
+        String street2 = request.getParameter("street2");
+        String city = request.getParameter("city");
+        String state = request.getParameter("state");
+        String zipcode = request.getParameter("zipcode");
+        
+        Transaction newTransaction = new Transaction();
+        //newTransaction.setUserId(getUserid());
+        //newTransaction.setCarId(carId);
+        //newTransaction.setPurchaseDate(LocalDate.now());
+        newTransaction.setPurchasePrice(purchasePrice);
+        newTransaction.setPurchaseType(purchaseType);
+        newTransaction.setName(name);
+        newTransaction.setEmail(email);
+        newTransaction.setPhone(phone);
+        newTransaction.setStreetMain(street1);
+        newTransaction.setStreetAlt(street2);
+        newTransaction.setCity(city);
+        newTransaction.setState(state);
+        newTransaction.setZipcode(zipcode);
+        
+        try {
+            transactionDao.addTransaction(newTransaction);
+            carDao.markCarPurchased(curCar);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        
         
         return "redirect:/sales/makepurchase/" + carId;
+    }
+    
+    public Integer getUserid(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = ((DealershipUserDetails) auth.getPrincipal()).getUser();
+        return Math.toIntExact(user.getId());
     }
     
     

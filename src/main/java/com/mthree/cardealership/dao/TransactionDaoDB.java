@@ -47,7 +47,7 @@ public class TransactionDaoDB implements TransactionDao {
 
     @Override
     public Transaction addTransaction(Transaction transaction) {
-        final String INSERT_CONTACT = "INSERT INTO transactions(purchaseprice, purchasetype, name, email, phone, streeet1, " +
+        final String INSERT_CONTACT = "INSERT INTO transactions(purchaseprice, purchasetype, name, email, phone, street1, " +
                 "street2, city, state, zipcode) "
                 + "VALUES(?,?,?,?,?,?,?,?,?,?)";
         jdbc.update(INSERT_CONTACT,
