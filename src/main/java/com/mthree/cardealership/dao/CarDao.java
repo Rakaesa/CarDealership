@@ -17,4 +17,5 @@ public interface CarDao {
     List<Car> getAllCars();
     Car addCar(Car c);
     void deleteCarById(int id);
+    void markCarPurchased(Car car);
 }

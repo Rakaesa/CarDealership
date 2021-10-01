@@ -39,7 +39,7 @@ public class CarDaoDB implements CarDao{
     @Override
     public List<Car> getAllCars() {
         final String SELECT_ALL_CARS = "SELECT car.id as id, year, type, mrsp, price, vin, interior, trans, color, bodystyle," +
-" description, featured, make, model, modelid from cardealership.car car" +
+" description, featured, purchased, make, model, modelid from cardealership.car car" +
 " JOIN cardealership.model mdl on car.modelid = mdl.id" +
 " JOIN cardealership.make on mdl.makeid = cardealership.make.id";
         
@@ -64,10 +64,10 @@ public class CarDaoDB implements CarDao{
     private String description;
     private boolean isFeatured;
         */
-        final String INSERT_CAR = "INSERT INTO car(modelID, year, type, mrsp, price, vin, interior, trans, color, bodyStyle,description, featured) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        final String INSERT_CAR = "INSERT INTO car(modelID, year, type, mrsp, price, vin, interior, trans, color, bodyStyle,description, featured, purchased) "
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbc.update(INSERT_CAR,
-                c.getModelID(), c.getYear(), c.getType(), c.getMsrp(), c.getPrice(), c.getVin(), c.getInteriorColor(), c.getTransmission(), c.getColor(), c.getBodyStyle(), c.getDescription(), c.isIsFeatured());
+                c.getModelID(), c.getYear(), c.getType(), c.getMsrp(), c.getPrice(), c.getVin(), c.getInteriorColor(), c.getTransmission(), c.getColor(), c.getBodyStyle(), c.getDescription(), c.isIsFeatured(),c.isIsPurchased());
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         c.setId(newId);
@@ -90,6 +90,15 @@ public class CarDaoDB implements CarDao{
                 + "year = ? , type = ? , mrsp = ? , price = ? , vin = ? , interior = ? , trans = ? , color = ? , bodyStyle = ? ,description = ? , featured  = ?  WHERE ID = ? ";
         jdbc.update(UPDATE_CAR, modelID, year, type, mrsp, price, vin, interior, trans, color, bodyStyle, description, featured, id);
     }
+    
+    @Override
+    public void markCarPurchased(Car car) {
+        
+        final String Mark_Purchased = "UPDATE car SET purchased = true where id = ?";
+        jdbc.update(Mark_Purchased, car.getId());
+        
+    }
+    
     public static final class CarMapper implements RowMapper<Car> {
 
         
