@@ -27,27 +27,27 @@ public class TransactionController {
     @Autowired
     TransactionDao transactionDao;
 
-    @GetMapping("transactions")
+    @GetMapping("admin/transactions")
     public String displayTransactions(Model model) {
         List<Transaction> transactions = transactionDao.getAllTransactions();
         model.addAttribute("transactions", transactions);
-        return "admin/transactions";
+        return "transactions";
     }
 
-    @GetMapping("transactionsForUser")
+    @GetMapping("admin/transactionsForUser")
     public String displayTransactionsForUser(User user, Model model) {
         List<Transaction> transactions = transactionDao.getTransactionsForUser(user);
         model.addAttribute("transactions", transactions);
-        return "admin/transactions";
+        return "transactions";
     }
 
-    @PostMapping("addTransaction")
+    @PostMapping("admin/addTransaction")
     public String addTransaction(Transaction transaction, HttpServletRequest request) {
         transactionDao.addTransaction(transaction);
         return "redirect:/admin/transactions";
     }
 
-    @GetMapping("deleteTransaction")
+    @GetMapping("admin/deleteTransaction")
     public String deleteTransaction(Integer id) {
         transactionDao.deleteTransactionById(id);
         return "redirect:/admin/transactions";
