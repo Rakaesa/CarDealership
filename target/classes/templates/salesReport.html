@@ -25,7 +25,7 @@
                 <div class="col-4">
                     <label for="user" class="form-label">User</label>
                     <select id="user" name="user" class="form-control">
-                        <option name="all">All</option>
+                        <option value="all" name="all">All</option>
                         <option th:each="user: ${users}" th:value="${user.id}" th:text="${user.firstName + ' ' + user.lastName}"></option>
                     </select>
                 </div>
@@ -64,7 +64,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="sale: ${sales}">
-                    <td th:text="${sale.name}">User</td>
+                    <td th:text="${sale.user}">User</td>
                     <td th:text="${sale.totalSales}">Total Sales</td>
                     <td th:text="${sale.totalVehicles}">Total Vechicles</td>
                 </tr>

@@ -1,20 +1,11 @@
 package com.mthree.cardealership.entities;
 
 public class InventoryReport {
-    private int id;
     private int year;
     private String make;
     private String model;
     private int count;
     private double stockValue;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getYear() {
         return year;
