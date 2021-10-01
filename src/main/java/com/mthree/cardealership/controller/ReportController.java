@@ -35,24 +35,29 @@ public class ReportController {
     @Autowired
     InventoryReportDao inventoryReportDao;
     
-    @GetMapping("admin/reports")
-    public String displayReportsBase(){
-        return "redirect:/admin/reports/index";
+    @GetMapping("/reports")
+    public String displayReportsBaseInv(){
+        return "redirect:/sales/reports/index";
     }
     
-    @GetMapping("admin/reports/index")
+    @GetMapping("sales/reports")
+    public String displayReportsBase(){
+        return "redirect:/sales/reports/index";
+    }
+    
+    @GetMapping("sales/reports/index")
     public String displayReports() {
         return "reports";
     }
 
-    @GetMapping("admin/reports/sale")
+    @GetMapping("sales/reports/sale")
     public String displaySalesReport(Model model) {
         List<User> users = userDao.getAllUsers();
         model.addAttribute("users", users);
         return "salesReport";
     }
 
-    @GetMapping("admin/reports/inventory")
+    @GetMapping("sales/reports/inventory")
     public String displayInventoryReport(Model model) {
         List<InventoryReport> newInventoryReports = inventoryReportDao.getNewInventoryReports();
         List<InventoryReport> usedInventoryReports = inventoryReportDao.getUsedInventoryReports();
@@ -61,7 +66,7 @@ public class ReportController {
         return "inventoryReport";
     }
 
-    @PostMapping("admin/reports/sales")
+    @PostMapping("sales/reports/sales")
     public String displaySalesReport(HttpServletRequest request, Model model) {
         List<SalesReport> salesReports;
         String fromDateString = request.getParameter("fromDate");
