@@ -6,69 +6,71 @@ and open the template in the editor.
 -->
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <title>Specials</title>
-  </head>
-  <body>
-    <!-- Main Body of Page --> 
-    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="../../bootstrap.min.css" rel="stylesheet">
+        <link href="../../ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href="../../jumbotron.css" rel="stylesheet">
+        <title>Specials</title>
+    </head>
+    <body>
+        <!-- Main Body of Page --> 
+    <head th:replace="common-header :: common-header" />
     <div class="container">
-            <div class="row m-4">
-                
-                <h1>Specials</h1>
-            </div>
-            
+        <div class="row m-4">
+
+            <h1>Specials</h1>
+        </div>
+
         <div th:if="${#lists.isEmpty(specialList)}">
             <hr>
             <h3>There is currently no Special.</h3>
             <span>Please check at a later time.</span>
         </div>
-        
-            <div th:each="special : ${specialList}" class="row m-4 border border-dark pt-2">
-                <div class="col-3">
-                    <img src="/limitedTimeOffer.png" class="img-fluid">
-                </div>
-                <div class="col-9">
- 
-                    <form action="deleteSpecial" method="GET">
-                        <div class="row">
+
+        <div th:each="special : ${specialList}" class="row m-4 border border-dark pt-2">
+            <div class="col-3">
+                <img src="/limitedTimeOffer.png" class="img-fluid">
+            </div>
+            <div class="col-9">
+
+                <form action="deleteSpecial" method="GET">
+                    <div class="row">
 
                         <label th:text="${special.title}" class="col-3 col-form-label font-weight-bold">
-                                Special Title</label>
+                            Special Title</label>
                         <input th:value="${special.id}" type="hidden" name="specialId"/>   
-                       
-                        </div>
-                        <div class="form-group row">
 
-                            <label th:text="${special.description}" class="col-12 col-form-label">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                when an unknown printer took a galley of type and scrambled it to make a type 
-                                specimen book. It has survived not only five centuries, but also the leap into 
-                                electronic typesetting, remaining essentially unchanged. It was popularised in 
-                                the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                                and more recently with desktop publishing software like Aldus PageMaker including 
-                                versions of Lorem Ipsum.
-                            </label>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="form-group row">
+
+                        <label th:text="${special.description}" class="col-12 col-form-label">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            when an unknown printer took a galley of type and scrambled it to make a type 
+                            specimen book. It has survived not only five centuries, but also the leap into 
+                            electronic typesetting, remaining essentially unchanged. It was popularised in 
+                            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                            and more recently with desktop publishing software like Aldus PageMaker including 
+                            versions of Lorem Ipsum.
+                        </label>
+                    </div>
+                </form>
             </div>
-        
+
         </div>
     </div>
     <!-- End main body -->
-    
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>
