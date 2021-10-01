@@ -34,6 +34,14 @@ public class RoleDaoDB implements RoleDao{
         return jdbc.queryForObject(SELECT_ROLE, new RoleMapper(), name);        
     }
     
+    @Override
+     public Role getRoleById(int id){
+         
+         final String SELECT_ROLE = "SELECT * FROM roles WHERE id = ?;";
+         return jdbc.queryForObject(SELECT_ROLE, new RoleMapper(), id);
+         
+     } 
+    
      public static final class RoleMapper implements RowMapper<Role> {
 
         @Override
@@ -44,8 +52,5 @@ public class RoleDaoDB implements RoleDao{
             role.setRole(rs.getString("role"));
             return role;
         }
-    }
-    
-   
-    
+    }   
 }
