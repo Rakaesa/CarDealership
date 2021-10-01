@@ -124,6 +124,7 @@ public class CarDaoDB implements CarDao{
             car.setBodyStyle(rs.getString("bodyStyle"));
             car.setDescription(rs.getString("description"));
             car.setIsFeatured(rs.getBoolean("featured"));
+            car.setIsPurchased(rs.getBoolean("purchased"));
             return car;
         }
     }
