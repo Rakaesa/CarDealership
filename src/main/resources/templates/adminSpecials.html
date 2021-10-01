@@ -56,10 +56,10 @@ and open the template in the editor.
                 <form action="deleteSpecial" method="GET">
                     <div class="row">
 
-                        <label th:text="${special.title}" class="col-3 col-form-label font-weight-bold">
+                        <label th:text="${special.title}" class="col-6 col-form-label font-weight-bold">
                             Special Title</label>
                         <input th:value="${special.id}" type="hidden" name="specialId"/>   
-                        <label for="specialDeleteButton" class="col-6 col-form-label"></label>
+                        <label for="specialDeleteButton" class="col-4 col-form-label"></label>
                         <button type="submit" class="btn btn-danger float-right">Delete</button>
                     </div>
                     <div class="form-group row">
