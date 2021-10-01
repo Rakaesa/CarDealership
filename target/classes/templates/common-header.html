@@ -1,19 +1,28 @@
-        <nav th:fragment="common-header" class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/home/">Home</a>
-                    <a class="navbar-brand" href="/home/car/new">New Inventory</a>
-                    <a class="navbar-brand" href="/home/car/used">Used Inventory</a>
-                    <a class="navbar-brand" href="/home/specials">Specials</a>
-                    <a class="navbar-brand" href="/home/contactUs">Contact</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                </div>
+<nav th:fragment="common-header" class="navbar-fixed-top">
+    <nav class="navbar-inversed navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/home/car/new">New Inventory</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/car/used">Used Inventory</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/home/specials">Specials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/contactUs">Contact</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
+</nav>
